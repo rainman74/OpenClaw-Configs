@@ -76,12 +76,17 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
   - requested media/content,
   - concise success confirmation,
   - concise failure explanation.
+- Exactly one user-visible response is allowed per user turn.
+- Do not send follow-up paraphrases, restatements, or duplicate confirmations after a successful media delivery.
 - Never return fallback placeholders such as `NO`.
 - Routine internal tool traces stay hidden from users.
 
 ### Media Runtime Behavior
 - Returning only text/URL is invalid when direct media delivery is required.
 - Markdown image embeds are invalid for message-tool media delivery.
+- For media requests, complete the turn with a single final media message.
+- If a caption is needed, include exactly one caption in that media message.
+- Never send an additional standalone text message that repeats or rephrases the caption/content unless explicitly requested by the user.
 - Mandatory deterministic flow:
   1. Download/generate media in `tmp/` processing location.
   2. Validate file exists and size > 0.
