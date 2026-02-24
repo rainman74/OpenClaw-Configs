@@ -399,26 +399,40 @@
         "enabled": true,
         "maxBytes": 20971520,
         "timeoutSeconds": 120,
+        "attachments": {
+          "mode": "first",
+          "maxAttachments": 1,
+          "prefer": "path"
+        },
         "models": [
-          {
-            "provider": "moonshot",
-            "model": "kimi-k2.5"
-          },
-          {
-            "provider": "google",
-            "model": "gemini-3-flash-preview"
-          }
+          { "provider": "moonshot", "model": "kimi-k2.5" },
+          { "provider": "google", "model": "gemini-3-flash-preview" }
         ]
       },
       "video": {
         "enabled": true,
         "maxBytes": 52428800,
         "timeoutSeconds": 240,
+        "attachments": {
+          "mode": "first",
+          "maxAttachments": 1,
+          "prefer": "path"
+        },
         "models": [
-          {
-            "provider": "google",
-            "model": "gemini-3-flash-preview"
-          }
+          { "provider": "google", "model": "gemini-3-flash-preview" }
+        ]
+      },
+      "image": {
+        "enabled": true,
+        "maxBytes": 20971520,
+        "timeoutSeconds": 120,
+        "attachments": {
+          "mode": "first",
+          "maxAttachments": 1,
+          "prefer": "path"
+        },
+        "models": [
+          { "provider": "google", "model": "gemini-3-flash-preview" }
         ]
       }
     },
