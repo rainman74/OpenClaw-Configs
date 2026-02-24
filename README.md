@@ -72,7 +72,7 @@ If a result cannot be fully verified, it must not be treated as successful.
 - Missing or ambiguous success indicators are treated as failures.
 - Simulated tool success is forbidden.
 - Deterministic media flow uses `tmp/` → `send/` and delivery via `send/<file>`.
-- Cleanup is allowed only after confirmed successful delivery.
+- After each completed run (success or failure), all run-local media artifacts in `tmp/` and `send/` must be deleted unless the user explicitly requests debug retention.
 
 ---
 
