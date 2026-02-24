@@ -9,7 +9,7 @@ This repository contains the canonical configuration guidance for a deterministi
 - `MEMORY.md` — global policy and governance (highest authority)
 - `TOOLS.md` — tool runtime behavior and execution contracts
 - `TOOLS_ENV.md` — environment setup, paths, binaries, and variables
-- `openclaw_linux.json` / `openclaw_windows.json` — platform-specific JSON configuration
+- (optional) `openclaw_linux.json` / `openclaw_windows.json` — platform-specific JSON configuration when present
 
 ---
 
@@ -25,6 +25,16 @@ Rules:
 - `TOOLS_ENV.md` is limited to environment/setup facts.
 
 ---
+
+
+## Guidelines Compliance Check
+
+This repository was reviewed against the official OpenClaw start guidance (`https://docs.openclaw.ai/start/openclaw`) with focus on:
+- clear authority hierarchy (`MEMORY.md` > `TOOLS.md` > `TOOLS_ENV.md`),
+- strict separation of policy/runtime/environment responsibilities,
+- deterministic and verifiable runtime behavior.
+
+Current status: the markdown configuration set is aligned with that model.
 
 ## Final Configuration State
 
