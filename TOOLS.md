@@ -93,11 +93,15 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
   3. Copy to `send/` staging location.
   4. Send with message tool using `send/<file>`.
   5. Wait for explicit success response.
-  6. Cleanup only after explicit success confirmation.
-- If send confirmation is missing/false:
-  - do not cleanup,
-  - preserve artifacts,
-  - treat operation as failed.
+  6. Immediately remove all workflow-local artifacts after the operation reaches a terminal state.
+     - Success path: delete staged and processing files/folders right after explicit send success.
+     - Failure path: delete staged and processing files/folders before returning the failure to the user.
+     - Exception: preserve artifacts only when the user explicitly requests debugging retention.
+- Cleanup scope is mandatory and must be exhaustive for the active workflow run:
+  - `tmp/` artifacts created for analysis/generation/posting (videos, images, audio, extracted frames, transcripts, helper JSON/HTML).
+  - Corresponding `send/` staged copies created for delivery.
+  - Empty temporary subdirectories created by the run should be removed as well.
+- Never leave run-created media artifacts behind in `tmp/` or `send/` after completion.
 - Cleanup is a state-changing action and follows the same verification requirements as primary tool calls.
 - Screenshot runtime rules:
   - capture viewport only,
@@ -233,7 +237,7 @@ The following commonly used OpenClaw operational practices are explicitly adopte
 - Deterministic execution and no simulated success (`ok`-based confirmation before claims).
 - Strict schema adherence (partial payloads are invalid for strict tools).
 - Workspace-relative media delivery (`send/<file>`) with staging separation (`tmp/` -> `send/`).
-- Cleanup only after explicit send success (no destructive cleanup on uncertain state).
+- Mandatory terminal cleanup for run-local `tmp/` + `send/` artifacts (unless explicit debug retention is requested).
 - Deterministic provider fallback order for image sourcing.
 - Rate-limit-aware failover and bounded HTTP/tool timeouts.
 
