@@ -206,14 +206,14 @@
         ]
       },
       "anthropic": {
-        "baseUrl": "https://api.anthropic.com/v1",
+        "baseUrl": "https://api.anthropic.com",
         "apiKey": "${ANTHROPIC_API_KEY}",
-        "api": "openai-completions",
+        "api": "anthropic-messages",
         "models": [
           {
             "id": "claude-sonnet-4-5",
             "name": "Claude Sonnet 4.5",
-            "api": "openai-completions",
+            "api": "anthropic-messages",
             "reasoning": false,
             "input": [
               "text"
@@ -230,7 +230,7 @@
           {
             "id": "claude-opus-4-5",
             "name": "Claude Opus 4.5",
-            "api": "openai-completions",
+            "api": "anthropic-messages",
             "reasoning": false,
             "input": [
               "text"
@@ -485,7 +485,7 @@
     "dmScope": "per-channel-peer",
     "resetTriggers": [
       "/reset",
-	  "/new"
+      "/new"
     ],
     "reset": {
       "mode": "daily",
@@ -524,7 +524,7 @@
       ],
       "groupPolicy": "allowlist",
       "ackReaction": {
-        "emoji": "??",
+        "emoji": "👀",
         "direct": true,
         "group": "mentions"
       },
@@ -567,7 +567,7 @@
       },
       "reactionNotifications": "all",
       "reactionLevel": "extensive",
-      "ackReaction": "??"
+      "ackReaction": "👀"
     }
   },
   "discovery": {
