@@ -475,8 +475,8 @@
     "nativeSkills": "auto",
     "text": true,
     "bash": true,
-    "config": false,
-    "debug": false,
+    "config": true,
+    "debug": true,
     "restart": true,
     "ownerDisplay": "raw"
   },
@@ -484,7 +484,8 @@
     "scope": "per-sender",
     "dmScope": "per-channel-peer",
     "resetTriggers": [
-      "/reset"
+      "/reset",
+	  "/new"
     ],
     "reset": {
       "mode": "daily",
