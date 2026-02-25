@@ -296,9 +296,7 @@
         "fallbacks": [
           "google/gemini-3-flash-preview",
           "google/gemini-2.5-flash",
-          "ollama/kimi-k2.5:cloud",
-          "xai/grok-4-1-fast",
-          "anthropic/claude-sonnet-4-5"
+          "ollama/kimi-k2.5:cloud"
         ]
       },
       "models": {
