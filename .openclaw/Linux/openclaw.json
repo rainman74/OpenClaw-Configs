@@ -594,7 +594,14 @@
     "mode": "local",
     "bind": "lan",
     "controlUi": {
-      "allowInsecureAuth": false
+      "enabled": true,
+      "allowInsecureAuth": true,
+      "dangerouslyAllowHostHeaderOriginFallback": true,
+      "allowedOrigins": [
+        "http://127.0.0.1:18789",
+        "http://localhost:18789",
+        "http://192.168.178.5:18789"
+      ]
     },
     "auth": {
       "mode": "token",
@@ -608,7 +615,7 @@
       "token": "${REMOTE_TOKEN}"
     },
     "tls": {
-      "enabled": true,
+      "enabled": false,
       "certPath": "/volume1/openclaw/cert.pem",
       "keyPath": "/volume1/openclaw/key.pem"
     },
