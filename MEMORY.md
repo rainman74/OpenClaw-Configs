@@ -49,7 +49,10 @@ Highest authority.
   3. Load `memory/<today>.md` if present.
   4. If both exist, prefer daily file details over weekly summaries on conflicts.
   5. Use loaded content as long-term context for the active conversation.
-- Durable writes are allowed only in `memory/YYYY-MM-DD.md` and should include only durable items:
+- Durable writes are allowed in:
+  - `memory/YYYY-MM-DD.md` for normal durable memory updates
+  - `memory/weekly/YYYY-Www.md` only for weekly consolidation outputs
+- Durable memory entries should include only durable items:
   - user preferences
   - stable facts
   - decisions
@@ -123,4 +126,3 @@ If conflicts occur:
 - [ ] Contains no setup/install/dependency/path instructions.
 - [ ] Preserves valid non-contradictory policy requirements.
 - [ ] No contradictions with TOOLS.md or TOOLS_ENV.md.
-
