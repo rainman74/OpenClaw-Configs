@@ -63,10 +63,13 @@ Highest authority.
   - user explicitly says `weekly`, or
   - a new ISO week is detected relative to the last weekly file used.
 - Weekly consolidation procedure:
-  1. Read all daily files for the current ISO week.
-  2. Create/update `memory/weekly/YYYY-Www.md` consolidating durable facts/preferences, decisions, project/status, and open items/next actions.
-  3. Never delete files during consolidation.
-  4. If this was the only requested action, reply exactly: `OK WEEKLY READY`.
+  1. Determine consolidation target week:
+     - If trigger is explicit user `weekly`, target the current ISO week.
+     - If trigger is ISO-week rollover, target the just-completed ISO week (the last weekly file context), not the new week.
+  2. Read all daily files for the target ISO week.
+  3. Create/update `memory/weekly/YYYY-Www.md` for that target week, consolidating durable facts/preferences, decisions, project/status, and open items/next actions.
+  4. Never delete files during consolidation.
+  5. If this was the only requested action, reply exactly: `OK WEEKLY READY`.
 - If only memory writing was performed and no additional response is needed, reply exactly: `NO_REPLY`.
 - During compaction/memory-flush events, persist only durable items to `memory/YYYY-MM-DD.md`; if nothing durable should be stored, return exactly `NO_REPLY`.
 ### Access and Write Authority Policy
