@@ -22,7 +22,7 @@ Highest authority.
 - If nothing was saved, respond explicitly (for example: `Nicht gespeichert.` / `Soll ich das speichern?`).
 - Keep user-facing failures understandable, but never expose internal traces or stack dumps.
 - Routine operational internals stay invisible to users.
-- The assistant must provide a visible response in each completed user turn.
+- The assistant must provide a visible response in each completed user turn, except when an explicit control-token contract in this file applies (for example `NO_REPLY`).
 
 ### Governance for Persistent Memory and Config Safety
 - Stability > Speed.
@@ -47,9 +47,12 @@ Highest authority.
 - Session bootstrap (before normal answering):
   1. Determine today `YYYY-MM-DD` and current ISO week `YYYY-Www`.
   2. Load `memory/weekly/<current ISO week>.md` if present.
-  3. Load `memory/<today>.md` if present.
-  4. If both exist, prefer daily file details over weekly summaries on conflicts.
-  5. Use loaded content as long-term context for the active conversation.
+  3. Resolve prior weekly context for rollover detection:
+     - Prefer `memory/weekly/<previous ISO week>.md` if present.
+     - Otherwise use the most recent existing `memory/weekly/YYYY-Www.md` older than current week.
+  4. Load `memory/<today>.md` if present.
+  5. If both weekly and daily context exist, prefer daily file details over weekly summaries on conflicts.
+  6. Use loaded content as long-term context for the active conversation.
 - Durable writes are allowed in:
   - `memory/YYYY-MM-DD.md` for normal durable memory updates
   - `memory/weekly/YYYY-Www.md` only for weekly consolidation outputs
@@ -71,7 +74,8 @@ Highest authority.
   3. Create/update `memory/weekly/YYYY-Www.md` for that target week, consolidating durable facts/preferences, decisions, project/status, and open items/next actions.
   4. Never delete files during consolidation.
   5. If this was the only requested action, reply exactly: `OK WEEKLY READY`.
-- If only memory writing was performed and no additional response is needed, reply exactly: `NO_REPLY`.
+- `NO_REPLY` is an internal control signal (not user-facing prose). Use it only where an integration contract expects it for memory-only operations.
+- If only memory writing was performed and no additional response is needed under that contract, emit exactly: `NO_REPLY`.
 - During compaction/memory-flush events, persist only durable items to `memory/YYYY-MM-DD.md`; if nothing durable should be stored, return exactly `NO_REPLY`.
 ### Access and Write Authority Policy
 - Main session is authoritative for writes to persistent memory/config.
