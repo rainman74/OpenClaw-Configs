@@ -37,6 +37,41 @@ Highest authority.
   4. Diff-check planned change.
   5. Apply minimal edit.
   6. Re-read and verify persisted result.
+
+### Persistent Session Memory Rules
+- Session memory sources are restricted to:
+  - daily files: `memory/YYYY-MM-DD.md`
+  - weekly summaries: `memory/weekly/YYYY-Www.md`
+- `MEMORY.md` is policy-only and must not contain conversational/session facts.
+- Session bootstrap (before normal answering):
+  1. Determine today `YYYY-MM-DD` and current ISO week `YYYY-Www`.
+  2. Load `memory/weekly/<current ISO week>.md` if present.
+  3. Load `memory/<today>.md` if present.
+  4. If both exist, prefer daily file details over weekly summaries on conflicts.
+  5. Use loaded content as long-term context for the active conversation.
+- Durable writes are allowed in:
+  - `memory/YYYY-MM-DD.md` for normal durable memory updates
+  - `memory/weekly/YYYY-Www.md` only for weekly consolidation outputs
+- Durable memory entries should include only durable items:
+  - user preferences
+  - stable facts
+  - decisions
+  - ongoing tasks/status
+  - important context and follow-ups
+- Use clear headings and compact bullet points; avoid chatter and ephemeral details.
+- Weekly consolidation trigger:
+  - user explicitly says `weekly`, or
+  - a new ISO week is detected relative to the last weekly file used.
+- Weekly consolidation procedure:
+  1. Determine consolidation target week:
+     - If trigger is explicit user `weekly`, target the current ISO week.
+     - If trigger is ISO-week rollover, target the just-completed ISO week (the last weekly file context), not the new week.
+  2. Read all daily files for the target ISO week.
+  3. Create/update `memory/weekly/YYYY-Www.md` for that target week, consolidating durable facts/preferences, decisions, project/status, and open items/next actions.
+  4. Never delete files during consolidation.
+  5. If this was the only requested action, reply exactly: `OK WEEKLY READY`.
+- If only memory writing was performed and no additional response is needed, reply exactly: `NO_REPLY`.
+- During compaction/memory-flush events, persist only durable items to `memory/YYYY-MM-DD.md`; if nothing durable should be stored, return exactly `NO_REPLY`.
 ### Access and Write Authority Policy
 - Main session is authoritative for writes to persistent memory/config.
 - Sub-agents are read-only unless explicitly authorized.
