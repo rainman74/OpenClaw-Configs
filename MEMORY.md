@@ -47,7 +47,8 @@ Highest authority.
   1. Determine today `YYYY-MM-DD` and current ISO week `YYYY-Www`.
   2. Load `memory/weekly/<current ISO week>.md` if present.
   3. Load `memory/<today>.md` if present.
-  4. Use loaded content as long-term context for the active conversation.
+  4. If both exist, prefer daily file details over weekly summaries on conflicts.
+  5. Use loaded content as long-term context for the active conversation.
 - Durable writes are allowed only in `memory/YYYY-MM-DD.md` and should include only durable items:
   - user preferences
   - stable facts
@@ -64,6 +65,7 @@ Highest authority.
   3. Never delete files during consolidation.
   4. If this was the only requested action, reply exactly: `OK WEEKLY READY`.
 - If only memory writing was performed and no additional response is needed, reply exactly: `NO_REPLY`.
+- During compaction/memory-flush events, persist only durable items to `memory/YYYY-MM-DD.md`; if nothing durable should be stored, return exactly `NO_REPLY`.
 ### Access and Write Authority Policy
 - Main session is authoritative for writes to persistent memory/config.
 - Sub-agents are read-only unless explicitly authorized.
