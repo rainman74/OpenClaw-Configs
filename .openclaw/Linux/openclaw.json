@@ -153,8 +153,8 @@
         "api": "google-generative-ai",
         "models": [
           {
-            "id": "gemini-3-pro-preview",
-            "name": "Gemini 3 Pro Preview",
+            "id": "gemini-3-pro",
+            "name": "Gemini 3 Pro",
             "api": "google-generative-ai",
             "reasoning": false,
             "input": [
@@ -170,8 +170,8 @@
             "maxTokens": 65536
           },
           {
-            "id": "gemini-3-flash-preview",
-            "name": "Gemini 3 Flash Preview",
+            "id": "gemini-3-flash",
+            "name": "Gemini 3 Flash",
             "api": "google-generative-ai",
             "reasoning": false,
             "input": [
@@ -294,8 +294,9 @@
       "model": {
         "primary": "moonshot/kimi-k2.5",
         "fallbacks": [
-          "google/gemini-3-flash-preview",
+          "google/gemini-3-flash",
           "google/gemini-2.5-flash",
+          "moonshot/kimi-k2.5",
           "ollama/kimi-k2.5:cloud"
         ]
       },
@@ -314,11 +315,11 @@
             "cacheRetention": "short"
           }
         },
-        "google/gemini-3-pro-preview": {
-          "alias": "gemini3pro"
+        "google/gemini-3-flash": {
+          "alias": "gemini"
         },
-        "google/gemini-3-flash-preview": {
-          "alias": "gemini3"
+        "google/gemini-3-pro": {
+          "alias": "geminipro"
         },
         "google/gemini-2.5-flash": {
           "alias": "gemini2"
@@ -411,7 +412,7 @@
         },
         "models": [
           { "provider": "moonshot", "model": "kimi-k2.5" },
-          { "provider": "google", "model": "gemini-3-flash-preview" }
+          { "provider": "google", "model": "gemini-3-flash" }
         ]
       },
       "video": {
@@ -424,7 +425,7 @@
           "prefer": "path"
         },
         "models": [
-          { "provider": "google", "model": "gemini-3-flash-preview" }
+          { "provider": "google", "model": "gemini-3-flash" }
         ]
       },
       "image": {
@@ -437,7 +438,7 @@
           "prefer": "path"
         },
         "models": [
-          { "provider": "google", "model": "gemini-3-flash-preview" }
+          { "provider": "google", "model": "gemini-3-flash" }
         ]
       }
     },
