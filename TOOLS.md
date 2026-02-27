@@ -30,6 +30,25 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
 - If a tool call is missing/ambiguous/absent, report:
   - `Tool call did not confirm success.`
 
+### Memory Persistence Runtime Guard
+- Path normalization is mandatory **before** validation: decode URL-encoded separators, map `\` to `/`, collapse duplicate slashes, and resolve `.`/`..` segments. Traversal attempts are rejected even if normalization would land in an allowed directory.
+- Post-normalization directory allowlist is mandatory: writes are valid only under `memory/` (daily) or `memory/weekly/` (weekly).
+- For memory persistence operations, a write is valid only when the canonical path matches one of these exact patterns:
+  - `memory/YYYY-MM-DD.md`
+  - `memory/weekly/YYYY-Www.md`
+- Rejected-path behavior is deterministic: hard failure, no fallback auto-rename, no alternative target (such as logs/tmp), and explicit user-facing non-save response (for example `Nicht gespeichert.`).
+
+### Memory Guard Verification Matrix
+- Required acceptance tests for path guard behavior:
+  - allow: `memory/2026-02-26.md`
+  - allow: `memory/weekly/2026-W09.md`
+  - reject: `memory/2026-02-26-1448.md`
+  - reject: `memory/2026-02-26-missed-question.md`
+  - reject: `memory/weekly/2026-W9.md`
+  - reject: `memory\2026-02-26.md` when normalization is absent or incorrect
+  - reject: `memory/../memory/2026-02-26.md`
+  - reject: alternative extension variants such as `.MD` or `.markdown`
+
 ### Execution Safety Rules
 - Mandatory strict mode for shell scripts:
   - `set -euo pipefail`

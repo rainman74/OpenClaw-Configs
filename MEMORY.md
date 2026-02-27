@@ -42,6 +42,7 @@ Highest authority.
 - Session memory sources are restricted to:
   - daily files: `memory/YYYY-MM-DD.md`
   - weekly summaries: `memory/weekly/YYYY-Www.md`
+- Any other memory filename pattern is invalid and must never be created (for example timestamp/event files such as `memory/2026-02-26-1448.md` or `memory/2026-02-26-missed-question.md`).
 - Internal runtime hooks (for example `hooks.internal.entries.session-memory`) may keep ephemeral in-session state, but they do not replace or override the file-backed durable memory policy above.
 - `MEMORY.md` is policy-only and must not contain conversational/session facts.
 - Session bootstrap (before normal answering):
@@ -56,6 +57,15 @@ Highest authority.
 - Durable writes are allowed in:
   - `memory/YYYY-MM-DD.md` for normal durable memory updates
   - `memory/weekly/YYYY-Www.md` only for weekly consolidation outputs
+- Before any durable memory write, enforce canonical path validation:
+  1. Normalize path before checks: decode URL encoding, convert `\` to `/`, collapse duplicate `/`, and resolve dot segments (`.`/`..`) without escaping repository root. Any raw path containing traversal intent must still be rejected.
+  2. Build the exact canonical target path from current date/week.
+  3. Apply strict directory allowlist: only `memory/` (daily) and `memory/weekly/` (weekly) are writable.
+  4. Reject writes when canonical path does not match one of the two allowed full patterns.
+  5. Abort the write with no fallback filename and no alternative storage path.
+  6. Return explicit non-save response to user (for example `Nicht gespeichert.`) when the write is rejected.
+- If durable memory text contains event/title labels, store them as headings or bullets **inside** the allowed file, never in the filename.
+- Sub-agent writes must obey the same canonical validation and allowlist rules; unauthorized sub-agents remain write-blocked.
 - Durable memory entries should include only durable items:
   - user preferences
   - stable facts
