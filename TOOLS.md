@@ -184,6 +184,27 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
 - Provider runtime failover conditions include auth errors, rate-limit errors, and empty valid result sets.
 
 ### Domain-Specific Runtime Rules
+- PDF analysis triage (cost-control gate):
+  - Before any deep PDF extraction, run a lightweight document-type check and classify each input as:
+    1. text-native PDF (selectable/searchable text available),
+    2. mixed PDF (partial text + scanned pages),
+    3. scan-only/image PDF (no usable text layer).
+  - Minimum pre-check signals (deterministic):
+    - text extraction hit rate (characters per page),
+    - image-only page ratio,
+    - OCR requirement estimate (`none | partial | full`).
+  - If classification is `scan-only/image` or OCR estimate is `full`, the assistant must pause and explicitly request a go/no-go decision with the requester before continuing.
+  - The go/no-go prompt must include:
+    - expected compute/cost impact (higher than text-native analysis),
+    - expected latency impact,
+    - likely quality risks (OCR errors on low-quality scans),
+    - at least one lower-cost alternative path (for example source text request, narrowed page scope, metadata-only pass).
+  - Without explicit requester approval for the high-OCR path, do not start full OCR extraction.
+  - Community best-practice alignment (mandatory):
+    - apply staged processing (triage -> targeted OCR -> full OCR only if justified),
+    - prefer selective/page-range OCR over whole-document OCR,
+    - cache OCR/text artifacts to avoid repeated processing,
+    - log the classification and decision rationale for auditability and cost transparency.
 - Gmail runtime behavior:
   - prefer HTML body (`<p>`, `<br>`),
   - avoid raw command substitution for body injection,
