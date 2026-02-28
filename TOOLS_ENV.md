@@ -174,23 +174,6 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   - preferred voice: Kathja (Edge TTS)
   - default speaker: Kitchen HomePod
 
-## Community Best Practices & model-specific phrasing
-### General best practices (cross-model)
-- Formulate tasks with **goal, context, constraints, and output format**.
-- Use clear acceptance criteria (e.g., "max. 5 bullet points", "JSON with no additional text").
-- Separate facts from assumptions and mark uncertainty explicitly.
-- For tool/code tasks: plan first, execute second, verify third.
-
-### Specific guidance for KIMI-K2.5
-- Provide structured prompts with explicit intermediate steps ("Analyze → Plan → Answer").
-- Limit scope per request (one primary task instead of multiple goals) to reduce drift.
-- For sensitive decisions, request a short risk/trade-off list.
-
-### Specific guidance for Gemini-3-Flash
-- Prefer short, precise instructions with a strict output format.
-- For long inputs, state prioritization explicitly (e.g., "top 3 points first").
-- For higher reliability, add the rule: "If information is missing, state explicitly what is missing."
-
 ## Structure
 This file intentionally excludes:
 - tool behavior policy,
