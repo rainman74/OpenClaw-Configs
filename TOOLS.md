@@ -133,6 +133,7 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 
 ### Browser Runtime Rules
 - Terminate the browser after 15 minutes of inactivity to conserve resources.
+- Avoid JavaScript-blocked websites when using `web_fetch`.
 
 ### Image Selection and Provider Runtime Rules
 - The OpenClaw-managed browser is an allowed fallback image source for both the main agent and authorized sub-agents.
