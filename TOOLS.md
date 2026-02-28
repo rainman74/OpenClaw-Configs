@@ -7,7 +7,7 @@ Define tool runtime behavior, invocation discipline, validation contracts, failu
 Applies whenever tools are called or tool outputs are interpreted.
 
 ## Authority Level
-Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
+Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 
 ## Core Rules
 - You are a tool-using agent.
@@ -20,7 +20,7 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
 - If a tool fails, do not silently retry unless explicitly instructed.
 - Delayed responses are not success.
 - Schema validation failures are hard failures.
-- If TOOLS_ENV.md defines a mandatory execution prefix, that prefix is required.
+- If /TOOLS_ENV.md defines a mandatory execution prefix, that prefix is required.
 - Runtime rule sections in this file must never be truncated.
 
 ### Runtime Response Contract
@@ -32,21 +32,21 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
 
 ### Memory Persistence Runtime Guard
 - Path normalization is mandatory **before** validation: decode URL-encoded separators, map `\` to `/`, collapse duplicate slashes, and resolve `.`/`..` segments. Traversal attempts are rejected even if normalization would land in an allowed directory.
-- Post-normalization directory allowlist is mandatory: writes are valid only under `memory/` (daily) or `memory/weekly/` (weekly).
+- Post-normalization directory allowlist is mandatory: writes are valid only under `/memory/` (daily) or `/memory/weekly/` (weekly).
 - For memory persistence operations, a write is valid only when the canonical path matches one of these exact patterns:
-  - `memory/YYYY-MM-DD.md`
-  - `memory/weekly/YYYY-Www.md`
+  - `/memory/YYYY-MM-DD.md`
+  - `/memory/weekly/YYYY-Www.md`
 - Rejected-path behavior is deterministic: hard failure, no fallback auto-rename, no alternative target (such as logs/tmp), and explicit user-facing non-save response (for example `Nicht gespeichert.`).
 
 ### Memory Guard Verification Matrix
 - Required acceptance tests for path guard behavior:
-  - allow: `memory/2026-02-26.md`
-  - allow: `memory/weekly/2026-W09.md`
-  - reject: `memory/2026-02-26-1448.md`
-  - reject: `memory/2026-02-26-missed-question.md`
-  - reject: `memory/weekly/2026-W9.md`
-  - reject: `memory\2026-02-26.md` when normalization is absent or incorrect
-  - reject: `memory/../memory/2026-02-26.md`
+  - allow: `/memory/2026-02-26.md`
+  - allow: `/memory/weekly/2026-W09.md`
+  - reject: `/memory/2026-02-26-1448.md`
+  - reject: `/memory/2026-02-26-missed-question.md`
+  - reject: `/memory/weekly/2026-W9.md`
+  - reject: `/memory\2026-02-26.md` when normalization is absent or incorrect
+  - reject: `/memory/../memory/2026-02-26.md`
   - reject: alternative extension variants such as `.MD` or `.markdown`
 
 ### Execution Safety Rules
@@ -265,16 +265,16 @@ This file intentionally excludes:
 - dependency installation,
 - OS/platform provisioning,
 - binary path inventory and host-specific wiring.
-Those belong in TOOLS_ENV.md.
+Those belong in /TOOLS_ENV.md.
 
 ## Platform Notes
 Runtime behavior is platform-neutral.
 
 ### Applies to Windows
-- Same runtime behavior; use Windows aliases/prefixes from TOOLS_ENV.md.
+- Same runtime behavior; use Windows aliases/prefixes from /TOOLS_ENV.md.
 
 ### Applies to Linux
-- Same runtime behavior; use Linux prefixes/paths from TOOLS_ENV.md.
+- Same runtime behavior; use Linux prefixes/paths from /TOOLS_ENV.md.
 
 
 ## OpenClaw Community Best Practices (Adopted)
@@ -289,19 +289,19 @@ The following commonly used OpenClaw operational practices are explicitly adopte
 
 ## Interaction With Other Files
 ### File Hierarchy
-1. MEMORY.md (highest authority)
-2. TOOLS.md
-3. TOOLS_ENV.md
+1. /MEMORY.md (highest authority)
+2. /TOOLS.md
+3. /TOOLS_ENV.md
 
 If conflicts occur:
-- MEMORY.md overrides all
-- TOOLS.md overrides TOOLS_ENV.md for runtime behavior
-- TOOLS_ENV.md defines only environment constraints
+- /MEMORY.md overrides all
+- /TOOLS.md overrides /TOOLS_ENV.md for runtime behavior
+- /TOOLS_ENV.md defines only environment constraints
 
 ## Change Policy
 - Keep rules behavior-only.
 - Preserve valid existing runtime directives; relocate instead of delete.
-- Move setup/path/dependency/platform details to TOOLS_ENV.md.
+- Move setup/path/dependency/platform details to /TOOLS_ENV.md.
 - Remove only contradictory or duplicate runtime directives.
 
 ## Validation Checklist
