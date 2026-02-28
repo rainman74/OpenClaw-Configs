@@ -40,27 +40,27 @@ Highest authority.
 
 ### Persistent Session Memory Rules
 - Session memory sources are restricted to:
-  - daily files: `memory/YYYY-MM-DD.md`
-  - weekly summaries: `memory/weekly/YYYY-Www.md`
-- Any other memory filename pattern is invalid and must never be created (for example timestamp/event files such as `memory/2026-02-26-1448.md` or `memory/2026-02-26-missed-question.md`).
+  - daily files: `/memory/YYYY-MM-DD.md`
+  - weekly summaries: `/memory/weekly/YYYY-Www.md`
+- Any other memory filename pattern is invalid and must never be created (for example timestamp/event files such as `/memory/2026-02-26-1448.md` or `/memory/2026-02-26-missed-question.md`).
 - Internal runtime hooks (for example `hooks.internal.entries.session-memory`) may keep ephemeral in-session state, but they do not replace or override the file-backed durable memory policy above.
-- `MEMORY.md` is policy-only and must not contain conversational/session facts.
+- `/MEMORY.md` is policy-only and must not contain conversational/session facts.
 - Session bootstrap (before normal answering):
   1. Determine today `YYYY-MM-DD` and current ISO week `YYYY-Www`.
-  2. Load `memory/weekly/<current ISO week>.md` if present.
+  2. Load `/memory/weekly/<current ISO week>.md` if present.
   3. Resolve prior weekly context for rollover detection:
-     - Prefer `memory/weekly/<previous ISO week>.md` if present.
-     - Otherwise use the most recent existing `memory/weekly/YYYY-Www.md` older than current week.
-  4. Load `memory/<today>.md` if present.
+     - Prefer `/memory/weekly/<previous ISO week>.md` if present.
+     - Otherwise use the most recent existing `/memory/weekly/YYYY-Www.md` older than current week.
+  4. Load `/memory/<today>.md` if present.
   5. If both weekly and daily context exist, prefer daily file details over weekly summaries on conflicts.
   6. Use loaded content as long-term context for the active conversation.
 - Durable writes are allowed in:
-  - `memory/YYYY-MM-DD.md` for normal durable memory updates
-  - `memory/weekly/YYYY-Www.md` only for weekly consolidation outputs
+  - `/memory/YYYY-MM-DD.md` for normal durable memory updates
+  - `/memory/weekly/YYYY-Www.md` only for weekly consolidation outputs
 - Before any durable memory write, enforce canonical path validation:
   1. Normalize path before checks: decode URL encoding, convert `\` to `/`, collapse duplicate `/`, and resolve dot segments (`.`/`..`) without escaping repository root. Any raw path containing traversal intent must still be rejected.
   2. Build the exact canonical target path from current date/week.
-  3. Apply strict directory allowlist: only `memory/` (daily) and `memory/weekly/` (weekly) are writable.
+  3. Apply strict directory allowlist: only `/memory/` (daily) and `/memory/weekly/` (weekly) are writable.
   4. Reject writes when canonical path does not match one of the two allowed full patterns.
   5. Abort the write with no fallback filename and no alternative storage path.
   6. Return explicit non-save response to user (for example `Nicht gespeichert.`) when the write is rejected.
@@ -81,12 +81,12 @@ Highest authority.
      - If trigger is explicit user `weekly`, target the current ISO week.
      - If trigger is ISO-week rollover, target the just-completed ISO week (the last weekly file context), not the new week.
   2. Read all daily files for the target ISO week.
-  3. Create/update `memory/weekly/YYYY-Www.md` for that target week, consolidating durable facts/preferences, decisions, project/status, and open items/next actions.
+  3. Create/update `/memory/weekly/YYYY-Www.md` for that target week, consolidating durable facts/preferences, decisions, project/status, and open items/next actions.
   4. Never delete files during consolidation.
   5. If this was the only requested action, reply exactly: `OK WEEKLY READY`.
 - `NO_REPLY` is an internal control signal (not user-facing prose). Use it only where an integration contract expects it for memory-only operations.
 - If only memory writing was performed and no additional response is needed under that contract, emit exactly: `NO_REPLY`.
-- During compaction/memory-flush events, persist only durable items to `memory/YYYY-MM-DD.md`; if nothing durable should be stored, return exactly `NO_REPLY`.
+- During compaction/memory-flush events, persist only durable items to `/memory/YYYY-MM-DD.md`; if nothing durable should be stored, return exactly `NO_REPLY`.
 ### Access and Write Authority Policy
 - Main session is authoritative for writes to persistent memory/config.
 - Sub-agents are read-only unless explicitly authorized.
@@ -109,8 +109,8 @@ Highest authority.
 
 ## Structure
 This file intentionally excludes:
-- tool runtime invocation behavior, payload contracts, and execution mechanics (TOOLS.md)
-- environment/runtime setup, dependencies, paths, and platform wiring (TOOLS_ENV.md)
+- tool runtime invocation behavior, payload contracts, and execution mechanics (/TOOLS.md)
+- environment/runtime setup, dependencies, paths, and platform wiring (/TOOLS_ENV.md)
 
 ## Platform Notes
 Policy is platform-neutral.
@@ -123,14 +123,14 @@ Policy is platform-neutral.
 
 ## Interaction With Other Files
 ### File Hierarchy
-1. MEMORY.md (highest authority)
-2. TOOLS.md
-3. TOOLS_ENV.md
+1. /MEMORY.md (highest authority)
+2. /TOOLS.md
+3. /TOOLS_ENV.md
 
 If conflicts occur:
-- MEMORY.md overrides all
-- TOOLS.md overrides TOOLS_ENV.md for runtime behavior
-- TOOLS_ENV.md defines only environment constraints
+- /MEMORY.md overrides all
+- /TOOLS.md overrides /TOOLS_ENV.md for runtime behavior
+- /TOOLS_ENV.md defines only environment constraints
 
 ## Change Policy
 - Keep content policy-only.
@@ -143,4 +143,4 @@ If conflicts occur:
 - [ ] Contains no tool invocation/runtime mechanics.
 - [ ] Contains no setup/install/dependency/path instructions.
 - [ ] Preserves valid non-contradictory policy requirements.
-- [ ] No contradictions with TOOLS.md or TOOLS_ENV.md.
+- [ ] No contradictions with /TOOLS.md or /TOOLS_ENV.md.

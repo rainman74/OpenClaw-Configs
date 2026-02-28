@@ -7,12 +7,12 @@ Define environment/runtime requirements, platform-specific setup, dependency exp
 Applies to local runtime, host runtime, container runtime, and CI/runtime environments.
 
 ## Authority Level
-Third authority (subordinate to MEMORY.md and TOOLS.md).
+Third authority (subordinate to /MEMORY.md and /TOOLS.md).
 
 ## Core Rules
 - This file stores environment/runtime constraints only.
-- Behavioral policy belongs in TOOLS.md.
-- Global governance/security belongs in MEMORY.md.
+- Behavioral policy belongs in /TOOLS.md.
+- Global governance/security belongs in /MEMORY.md.
 - Keep environment facts centralized here as single source of truth.
 
 ### Runtime Compatibility Targets
@@ -197,7 +197,7 @@ This file intentionally excludes:
 - response contracts,
 - failure semantics,
 - deterministic selection decisions.
-Those belong in TOOLS.md and MEMORY.md.
+Those belong in /TOOLS.md and /MEMORY.md.
 
 ## Platform Notes
 ### Applies to Windows
@@ -216,18 +216,18 @@ Those belong in TOOLS.md and MEMORY.md.
 
 ## Interaction With Other Files
 ### File Hierarchy
-1. MEMORY.md (highest authority)
-2. TOOLS.md
-3. TOOLS_ENV.md
+1. /MEMORY.md (highest authority)
+2. /TOOLS.md
+3. /TOOLS_ENV.md
 
 If conflicts occur:
-- MEMORY.md overrides all
-- TOOLS.md overrides TOOLS_ENV.md for runtime behavior
-- TOOLS_ENV.md defines only environment constraints
+- /MEMORY.md overrides all
+- /TOOLS.md overrides /TOOLS_ENV.md for runtime behavior
+- /TOOLS_ENV.md defines only environment constraints
 
 ## Change Policy
 - Keep content environment/setup/runtime only.
-- Preserve valid host/runtime facts; relocate behavior rules to TOOLS.md.
+- Preserve valid host/runtime facts; relocate behavior rules to /TOOLS.md.
 - Keep Linux/Windows details explicit when different.
 - Remove only contradictory/obsolete environment entries.
 
@@ -236,4 +236,4 @@ If conflicts occur:
 - [ ] Contains no behavior policy or response contract rules.
 - [ ] Explicitly covers Linux ARM64 and Windows x64.
 - [ ] Includes vars, paths, prefixes, binaries, and dependency references.
-- [ ] No contradictions with MEMORY.md or TOOLS.md.
+- [ ] No contradictions with /MEMORY.md or /TOOLS.md.
