@@ -39,6 +39,7 @@ Highest authority.
   6. Re-read and verify persisted result.
 
 ### Persistent Session Memory Rules
+- Memory paths in this section are workspace-root relative (e.g., `memory/...` means `<workspace>/memory/...`, not filesystem `/memory/...`).
 - Session memory sources are restricted to:
   - daily files: `/memory/YYYY-MM-DD.md`
   - weekly summaries: `/memory/weekly/YYYY-Www.md`

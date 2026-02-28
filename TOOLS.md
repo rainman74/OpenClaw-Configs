@@ -31,6 +31,7 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
   - `Tool call did not confirm success.`
 
 ### Memory Persistence Runtime Guard
+- Memory paths in this section are workspace-root relative (e.g., `memory/...` means `<workspace>/memory/...`, not filesystem `/memory/...`).
 - Path normalization is mandatory **before** validation: decode URL-encoded separators, map `\` to `/`, collapse duplicate slashes, and resolve `.`/`..` segments. Traversal attempts are rejected even if normalization would land in an allowed directory.
 - Post-normalization directory allowlist is mandatory: writes are valid only under `/memory/` (daily) or `/memory/weekly/` (weekly).
 - For memory persistence operations, a write is valid only when the canonical path matches one of these exact patterns:
