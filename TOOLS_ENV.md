@@ -32,7 +32,9 @@ Third authority (subordinate to MEMORY.md and TOOLS.md).
 - `FAL_AI_KEY`
 - `GEMINI_API_KEY`
 - `BRAVE_API_KEY`
-- `BROWSERLESS_TOKEN`
+
+### Browser Runtime Authentication Note
+- The OpenClaw-managed headless browser does not use `BROWSERLESS_TOKEN` for authentication.
 
 ### Workspace and Runtime Path Model
 - Canonical workspace roots:
