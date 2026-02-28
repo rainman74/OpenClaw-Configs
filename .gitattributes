@@ -1,0 +1,2 @@
+# Ensure shell scripts keep Unix line endings to preserve shebang execution on Linux/Synology.
+*.sh text eol=lf
