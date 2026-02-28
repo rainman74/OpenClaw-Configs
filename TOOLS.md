@@ -128,6 +128,9 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
   - maximum one screenshot per step unless explicitly required otherwise,
   - no confirmation screenshot after successful completion.
 
+### Browser Runtime Rules
+- Terminate the browser after 15 minutes of inactivity to conserve resources.
+
 ### Image Selection and Provider Runtime Rules
 - The OpenClaw-managed browser is an allowed fallback image source for both the main agent and authorized sub-agents.
 - The browser may be used when configured image providers do not return suitable images for the request.
