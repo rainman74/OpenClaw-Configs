@@ -39,12 +39,13 @@ Highest authority.
   6. Re-read and verify persisted result.
 
 ### Persistent Session Memory Rules
+- Memory paths in this section are workspace-root relative (e.g., `memory/...` means `<workspace>/memory/...`, not filesystem `/memory/...`).
 - Session memory sources are restricted to:
   - daily files: `memory/YYYY-MM-DD.md`
   - weekly summaries: `memory/weekly/YYYY-Www.md`
 - Any other memory filename pattern is invalid and must never be created (for example timestamp/event files such as `memory/2026-02-26-1448.md` or `memory/2026-02-26-missed-question.md`).
 - Internal runtime hooks (for example `hooks.internal.entries.session-memory`) may keep ephemeral in-session state, but they do not replace or override the file-backed durable memory policy above.
-- `MEMORY.md` is policy-only and must not contain conversational/session facts.
+- `/MEMORY.md` is policy-only and must not contain conversational/session facts.
 - Session bootstrap (before normal answering):
   1. Determine today `YYYY-MM-DD` and current ISO week `YYYY-Www`.
   2. Load `memory/weekly/<current ISO week>.md` if present.
@@ -109,8 +110,8 @@ Highest authority.
 
 ## Structure
 This file intentionally excludes:
-- tool runtime invocation behavior, payload contracts, and execution mechanics (TOOLS.md)
-- environment/runtime setup, dependencies, paths, and platform wiring (TOOLS_ENV.md)
+- tool runtime invocation behavior, payload contracts, and execution mechanics (/TOOLS.md)
+- environment/runtime setup, dependencies, paths, and platform wiring (/TOOLS_ENV.md)
 
 ## Platform Notes
 Policy is platform-neutral.
@@ -123,14 +124,14 @@ Policy is platform-neutral.
 
 ## Interaction With Other Files
 ### File Hierarchy
-1. MEMORY.md (highest authority)
-2. TOOLS.md
-3. TOOLS_ENV.md
+1. /MEMORY.md (highest authority)
+2. /TOOLS.md
+3. /TOOLS_ENV.md
 
 If conflicts occur:
-- MEMORY.md overrides all
-- TOOLS.md overrides TOOLS_ENV.md for runtime behavior
-- TOOLS_ENV.md defines only environment constraints
+- /MEMORY.md overrides all
+- /TOOLS.md overrides /TOOLS_ENV.md for runtime behavior
+- /TOOLS_ENV.md defines only environment constraints
 
 ## Change Policy
 - Keep content policy-only.
@@ -143,4 +144,4 @@ If conflicts occur:
 - [ ] Contains no tool invocation/runtime mechanics.
 - [ ] Contains no setup/install/dependency/path instructions.
 - [ ] Preserves valid non-contradictory policy requirements.
-- [ ] No contradictions with TOOLS.md or TOOLS_ENV.md.
+- [ ] No contradictions with /TOOLS.md or /TOOLS_ENV.md.

@@ -7,7 +7,7 @@ Define tool runtime behavior, invocation discipline, validation contracts, failu
 Applies whenever tools are called or tool outputs are interpreted.
 
 ## Authority Level
-Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
+Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 
 ## Core Rules
 - You are a tool-using agent.
@@ -20,7 +20,7 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
 - If a tool fails, do not silently retry unless explicitly instructed.
 - Delayed responses are not success.
 - Schema validation failures are hard failures.
-- If TOOLS_ENV.md defines a mandatory execution prefix, that prefix is required.
+- If /TOOLS_ENV.md defines a mandatory execution prefix, that prefix is required.
 - Runtime rule sections in this file must never be truncated.
 
 ### Runtime Response Contract
@@ -31,6 +31,7 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
   - `Tool call did not confirm success.`
 
 ### Memory Persistence Runtime Guard
+- Memory paths in this section are workspace-root relative (e.g., `memory/...` means `<workspace>/memory/...`, not filesystem `/memory/...`).
 - Path normalization is mandatory **before** validation: decode URL-encoded separators, map `\` to `/`, collapse duplicate slashes, and resolve `.`/`..` segments. Traversal attempts are rejected even if normalization would land in an allowed directory.
 - Post-normalization directory allowlist is mandatory: writes are valid only under `memory/` (daily) or `memory/weekly/` (weekly).
 - For memory persistence operations, a write is valid only when the canonical path matches one of these exact patterns:
@@ -265,16 +266,16 @@ This file intentionally excludes:
 - dependency installation,
 - OS/platform provisioning,
 - binary path inventory and host-specific wiring.
-Those belong in TOOLS_ENV.md.
+Those belong in /TOOLS_ENV.md.
 
 ## Platform Notes
 Runtime behavior is platform-neutral.
 
 ### Applies to Windows
-- Same runtime behavior; use Windows aliases/prefixes from TOOLS_ENV.md.
+- Same runtime behavior; use Windows aliases/prefixes from /TOOLS_ENV.md.
 
 ### Applies to Linux
-- Same runtime behavior; use Linux prefixes/paths from TOOLS_ENV.md.
+- Same runtime behavior; use Linux prefixes/paths from /TOOLS_ENV.md.
 
 
 ## OpenClaw Community Best Practices (Adopted)
@@ -289,19 +290,19 @@ The following commonly used OpenClaw operational practices are explicitly adopte
 
 ## Interaction With Other Files
 ### File Hierarchy
-1. MEMORY.md (highest authority)
-2. TOOLS.md
-3. TOOLS_ENV.md
+1. /MEMORY.md (highest authority)
+2. /TOOLS.md
+3. /TOOLS_ENV.md
 
 If conflicts occur:
-- MEMORY.md overrides all
-- TOOLS.md overrides TOOLS_ENV.md for runtime behavior
-- TOOLS_ENV.md defines only environment constraints
+- /MEMORY.md overrides all
+- /TOOLS.md overrides /TOOLS_ENV.md for runtime behavior
+- /TOOLS_ENV.md defines only environment constraints
 
 ## Change Policy
 - Keep rules behavior-only.
 - Preserve valid existing runtime directives; relocate instead of delete.
-- Move setup/path/dependency/platform details to TOOLS_ENV.md.
+- Move setup/path/dependency/platform details to /TOOLS_ENV.md.
 - Remove only contradictory or duplicate runtime directives.
 
 ## Validation Checklist
