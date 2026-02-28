@@ -129,6 +129,8 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
   - no confirmation screenshot after successful completion.
 
 ### Image Selection and Provider Runtime Rules
+- The OpenClaw-managed browser is an allowed fallback image source for both the main agent and authorized sub-agents.
+- The browser may be used when configured image providers do not return suitable images for the request.
 - Deterministic provider order:
   1. Cache
   2. Unsplash
@@ -136,7 +138,8 @@ Second authority (below MEMORY.md, above TOOLS_ENV.md for runtime behavior).
   4. Pixabay
   5. Wikimedia Commons
   6. Whitelisted direct hotlink
-  7. Abort
+  7. Browser (OpenClaw-managed)
+  8. Abort
 - Cache must be checked before any provider API call.
 - Use official documented endpoints only.
 - Global HTTP acceptance checks:
