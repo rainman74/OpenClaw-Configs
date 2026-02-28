@@ -33,9 +33,6 @@ Third authority (subordinate to MEMORY.md and TOOLS.md).
 - `GEMINI_API_KEY`
 - `BRAVE_API_KEY`
 
-### Browser Runtime Authentication Note
-- The OpenClaw-managed headless browser does not use `BROWSERLESS_TOKEN` for authentication.
-
 ### Workspace and Runtime Path Model
 - Canonical workspace roots:
   - Linux: `/volume1/openclaw/workspace`
