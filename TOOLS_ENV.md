@@ -38,11 +38,10 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   - Linux: `/volume1/openclaw/workspace`
   - Windows: `D:/Apps/OpenClaw/workspace`
 - Runtime directories:
-  - processing: `tmp/`
-  - send staging: `send/`
-- Message media path format: `send/<file>` (workspace-relative)
-- System `/tmp` is allowed for temporary email body files.
-- System `/tmp` is not allowed for message media delivery.
+  - processing: `<workspace>/tmp/` (alias forms `tmp/` and `/tmp/` must resolve to this workspace path only)
+  - send staging: `<workspace>/send/` (alias forms `send/` and `/send/` must resolve to this workspace path only)
+- Message media path format: `<workspace>/send/<file>` (workspace-relative)
+- Filesystem-global `/tmp` or `/send` locations outside `<workspace>` are invalid for media workflows.
 
 ### OpenClaw CLI Environment (Linux reference)
 - OpenClaw CLI invocation prefix:
@@ -128,7 +127,7 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   ```
 - If a script must write runtime artifacts to workspace processing, allow only that path:
   ```bash
-  deno run --allow-net --allow-read --allow-write=tmp/ script.ts
+  deno run --allow-net --allow-read --allow-write=<workspace>/tmp/ script.ts
   ```
 
 ### Graph Generation Environment

@@ -102,26 +102,28 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 - Routine internal tool traces stay hidden from users.
 
 ### Media Runtime Behavior
+- Path interpretation in this section is strict: `/tmp/` always means `<workspace>/tmp/`, and `/send/` always means `<workspace>/send/`.
+- Absolute filesystem `/tmp` or `/send` locations outside the workspace are invalid for media workflows.
 - Returning only text/URL is invalid when direct media delivery is required.
 - Markdown image embeds are invalid for message-tool media delivery.
 - For media requests, complete the turn with a single final media message.
 - If a caption is needed, include exactly one caption in that media message.
 - Never send an additional standalone text message that repeats or rephrases the caption/content unless explicitly requested by the user.
 - Mandatory deterministic flow:
-  1. Download/generate media in `tmp/` processing location.
+  1. Download/generate media in `<workspace>/tmp/` processing location.
   2. Validate file exists and size > 0.
-  3. Copy to `send/` staging location.
-  4. Send with message tool using `send/<file>`.
+  3. Copy to `<workspace>/send/` staging location.
+  4. Send with message tool using `<workspace>/send/<file>`.
   5. Wait for explicit success response.
   6. Immediately remove all workflow-local artifacts after the operation reaches a terminal state.
      - Success path: delete staged and processing files/folders right after explicit send success.
      - Failure path: delete staged and processing files/folders before returning the failure to the user.
      - Exception: preserve artifacts only when the user explicitly requests debugging retention.
 - Cleanup scope is mandatory and must be exhaustive for the active workflow run:
-  - `tmp/` artifacts created for analysis/generation/posting (videos, images, audio, extracted frames, transcripts, helper JSON/HTML).
-  - Corresponding `send/` staged copies created for delivery.
+  - `<workspace>/tmp/` artifacts created for analysis/generation/posting (videos, images, audio, extracted frames, transcripts, helper JSON/HTML).
+  - Corresponding `<workspace>/send/` staged copies created for delivery.
   - Empty temporary subdirectories created by the run should be removed as well.
-- Never leave run-created media artifacts behind in `tmp/` or `send/` after completion.
+- Never leave run-created media artifacts behind in `<workspace>/tmp/` or `<workspace>/send/` after completion.
 - Cleanup is a state-changing action and follows the same verification requirements as primary tool calls.
 - Screenshot runtime rules:
   - capture viewport only,
@@ -218,7 +220,7 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
   - verify UTF-8 correctness for non-ASCII content,
   - validate attachment size/type before send,
   - remove temporary body files after successful send,
-  - keep media delivery path behavior aligned with message-tool flow (`send/<file>`).
+  - keep media delivery path behavior aligned with message-tool flow (`<workspace>/send/<file>`).
 - TTS runtime behavior:
   - remove internal markers from visible output (`[[tts]]`, `[[/tts]]`, `<tts>`, `</tts>`),
   - TTS markers must never leak into user-visible responses,
@@ -283,8 +285,8 @@ The following commonly used OpenClaw operational practices are explicitly adopte
 
 - Deterministic execution and no simulated success (`ok`-based confirmation before claims).
 - Strict schema adherence (partial payloads are invalid for strict tools).
-- Workspace-relative media delivery (`send/<file>`) with staging separation (`tmp/` -> `send/`).
-- Mandatory terminal cleanup for run-local `tmp/` + `send/` artifacts (unless explicit debug retention is requested).
+- Workspace-relative media delivery (`<workspace>/send/<file>`) with staging separation (`<workspace>/tmp/` -> `<workspace>/send/`).
+- Mandatory terminal cleanup for run-local `<workspace>/tmp/` + `<workspace>/send/` artifacts (unless explicit debug retention is requested).
 - Deterministic provider fallback order for image sourcing.
 - Rate-limit-aware failover and bounded HTTP/tool timeouts.
 
