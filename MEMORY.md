@@ -83,7 +83,7 @@ Highest authority.
      - If trigger is ISO-week rollover, target the just-completed ISO week (the last weekly file context), not the new week.
   2. Read all daily files for the target ISO week.
   3. Create/update `/memory/weekly/YYYY-Www.md` for that target week, consolidating durable facts/preferences, decisions, project/status, and open items/next actions.
-  4. Never delete files during consolidation.
+  4. After consolidation is fully completed, delete the daily files for that consolidated target ISO week.
   5. If this was the only requested action, reply exactly: `OK WEEKLY READY`.
 - `NO_REPLY` is an internal control signal (not user-facing prose). Use it only where an integration contract expects it for memory-only operations.
 - If only memory writing was performed and no additional response is needed under that contract, emit exactly: `NO_REPLY`.

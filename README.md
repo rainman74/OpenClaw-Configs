@@ -51,7 +51,7 @@ Current status: the markdown configuration set is aligned with that model.
 ### Safety and Validation Hardening
 - Sensitive configuration changes follow a backup-first workflow.
 - Verification is required before claiming success.
-- Least-privilege guidance for write access is enforced (for example, scoped Deno write permissions such as `--allow-write=tmp/`).
+- Least-privilege guidance for write access is enforced (for example, scoped Deno write permissions such as `--allow-write=<workspace>/tmp/`).
 
 ---
 
@@ -71,8 +71,8 @@ If a result cannot be fully verified, it must not be treated as successful.
 - Success may only be reported after explicit confirmation (for example `{ ok: true }` or a documented equivalent).
 - Missing or ambiguous success indicators are treated as failures.
 - Simulated tool success is forbidden.
-- Deterministic media flow uses `tmp/` → `send/` and delivery via `send/<file>`.
-- After each completed run (success or failure), all run-local media artifacts in `tmp/` and `send/` must be deleted unless the user explicitly requests debug retention.
+- Deterministic media flow uses `<workspace>/tmp/` → `<workspace>/send/` and delivery via `<workspace>/send/<file>` (including alias normalization where `/tmp/` and `/send/` map to these workspace paths only).
+- After each completed run (success or failure), all run-local media artifacts in `<workspace>/tmp/` and `<workspace>/send/` must be deleted unless the user explicitly requests debug retention.
 
 ---
 
