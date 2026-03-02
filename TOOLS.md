@@ -222,6 +222,12 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
   - validate attachment size/type before send,
   - remove temporary body files after successful send,
   - keep media delivery path behavior aligned with message-tool flow (`<workspace>/send/<file>`).
+- Telegram media runtime behavior:
+  - in groups, process media only when the bot is explicitly mentioned (see `/MEMORY.md` mention policy).
+  - when a Telegram `file_id` is present, prefer Bot API flow (`getFile` -> `api.telegram.org/file/...`) before any URL-extractor fallback.
+  - log whether Bot API `getFile` was attempted and whether it succeeded/failed.
+  - if Bot API download is skipped because of size constraints, log the reason explicitly (for example `exceeds 20MB`).
+  - if URL-extractor fallback (`yt-dlp`) is used, log that fallback decision explicitly with source URL.
 - TTS runtime behavior:
   - remove internal markers from visible output (`[[tts]]`, `[[/tts]]`, `<tts>`, `</tts>`),
   - TTS markers must never leak into user-visible responses,
