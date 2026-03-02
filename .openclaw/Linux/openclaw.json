@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastTouchedVersion": "2026.2.22",
+    "lastTouchedVersion": "2026.3.1",
     "lastTouchedAt": ""
   },
   "env": {
@@ -11,7 +11,7 @@
   },
   "wizard": {
     "lastRunAt": "",
-    "lastRunVersion": "2026.2.22",
+    "lastRunVersion": "2026.3.1",
     "lastRunCommand": "onboard",
     "lastRunMode": "local"
   },
@@ -29,18 +29,18 @@
     "enabled": true,
     "remoteCdpTimeoutMs": 2000,
     "remoteCdpHandshakeTimeoutMs": 4000,
-    "executablePath": "",
+    "executablePath": "/volume1/@chromium/bin/chromium-wrapper",
     "headless": true,
     "noSandbox": true,
-    "attachOnly": true,
-    "defaultProfile": "browserless",
+    "attachOnly": false,
+    "defaultProfile": "openclaw",
     "profiles": {
-      "local": {
+      "openclaw": {
         "cdpPort": 18800,
         "color": "#AA0000"
       },
       "remote": {
-        "cdpUrl": "http://192.168.178.20:9222",
+        "cdpUrl": "http://192.168.178.20:18800",
         "color": "#00AA00"
       },
       "browserless": {
@@ -353,8 +353,8 @@
         "memoryFlush": {
           "enabled": true,
           "softThresholdTokens": 40000,
-          "systemPrompt": "Context getting large. Persist durable research state now.",
-          "prompt": "Update memory/YYYY-MM-DD.md with decisions, confirmed findings, open questions, key constraints, hypotheses, and next steps. Max 400 tokens. Reply NO_REPLY if nothing new."
+          "prompt": "Update memory/YYYY-MM-DD.md with decisions, confirmed findings, open questions, key constraints, hypotheses, and next steps. Max 400 tokens. Reply NO_REPLY if nothing new.",
+          "systemPrompt": "Context getting large. Persist durable research state now."
         }
       },
       "thinkingDefault": "low",
@@ -386,6 +386,7 @@
     "list": [
       {
         "id": "main",
+        "model": "moonshot/kimi-k2.5",
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
@@ -401,6 +402,22 @@
       }
     },
     "media": {
+      "image": {
+        "enabled": true,
+        "maxBytes": 20971520,
+        "timeoutSeconds": 120,
+        "attachments": {
+          "mode": "first",
+          "maxAttachments": 1,
+          "prefer": "path"
+        },
+        "models": [
+          {
+            "provider": "google",
+            "model": "gemini-3-flash"
+          }
+        ]
+      },
       "audio": {
         "enabled": true,
         "maxBytes": 20971520,
@@ -411,8 +428,14 @@
           "prefer": "path"
         },
         "models": [
-          { "provider": "moonshot", "model": "kimi-k2.5" },
-          { "provider": "google", "model": "gemini-3-flash" }
+          {
+            "provider": "moonshot",
+            "model": "kimi-k2.5"
+          },
+          {
+            "provider": "google",
+            "model": "gemini-3-flash"
+          }
         ]
       },
       "video": {
@@ -425,20 +448,10 @@
           "prefer": "path"
         },
         "models": [
-          { "provider": "google", "model": "gemini-3-flash" }
-        ]
-      },
-      "image": {
-        "enabled": true,
-        "maxBytes": 20971520,
-        "timeoutSeconds": 120,
-        "attachments": {
-          "mode": "first",
-          "maxAttachments": 1,
-          "prefer": "path"
-        },
-        "models": [
-          { "provider": "google", "model": "gemini-3-flash" }
+          {
+            "provider": "google",
+            "model": "gemini-3-flash"
+          }
         ]
       }
     },
@@ -601,14 +614,14 @@
     "bind": "lan",
     "controlUi": {
       "enabled": true,
-      "allowInsecureAuth": true,
-      "dangerouslyAllowHostHeaderOriginFallback": true,
-      "dangerouslyDisableDeviceAuth": true,
       "allowedOrigins": [
         "http://127.0.0.1:18789",
         "http://localhost:18789",
         "http://192.168.178.5:18789"
-      ]
+      ],
+      "dangerouslyAllowHostHeaderOriginFallback": true,
+      "allowInsecureAuth": true,
+      "dangerouslyDisableDeviceAuth": true
     },
     "auth": {
       "mode": "token",
