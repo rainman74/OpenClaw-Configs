@@ -340,7 +340,7 @@
           "alias": "ollama"
         }
       },
-      "workspace": "/volume1/openclaw/workspace",
+      "workspace": "D:/Apps/OpenClaw/workspace",
       "bootstrapMaxChars": 50000,
       "userTimezone": "Europe/Berlin",
       "contextPruning": {
