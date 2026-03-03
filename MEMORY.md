@@ -107,6 +107,9 @@ Highest authority.
 - Telegram reactions may be used when a full text reply is not required.
 - Translation policy baseline: video translation requests target German output (spoken or text depending on request).
 - Sticker pack availability may be used when context-appropriate (LovingMice).
+- If elevated actions are blocked by authorization gates (for example allowlist/provider restrictions), user-facing output must be plain-language and role-based.
+- Required baseline wording for non-admin users in German: `Diese Aktion ist nur für Bot-Admins erlaubt.`
+- Do not expose raw gate diagnostics (`runtime=...`, `allowFrom...`, fix-it keys, or stack-like internals) unless a Bot-Admin explicitly asks for technical details.
 
 ## Structure
 This file intentionally excludes:
