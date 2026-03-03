@@ -112,23 +112,6 @@
         "api": "openai-completions",
         "models": [
           {
-            "id": "grok-4-1",
-            "name": "Grok 4.1",
-            "api": "openai-completions",
-            "reasoning": false,
-            "input": [
-              "text"
-            ],
-            "cost": {
-              "input": 5,
-              "output": 15,
-              "cacheRead": 0.3,
-              "cacheWrite": 0
-            },
-            "contextWindow": 131072,
-            "maxTokens": 4096
-          },
-          {
             "id": "grok-4-1-fast",
             "name": "Grok 4.1 Fast",
             "api": "openai-completions",
@@ -153,23 +136,6 @@
         "api": "google-generative-ai",
         "models": [
           {
-            "id": "gemini-3-pro",
-            "name": "Gemini 3 Pro",
-            "api": "google-generative-ai",
-            "reasoning": false,
-            "input": [
-              "text"
-            ],
-            "cost": {
-              "input": 2.5,
-              "output": 10,
-              "cacheRead": 0.625,
-              "cacheWrite": 0
-            },
-            "contextWindow": 1048576,
-            "maxTokens": 65536
-          },
-          {
             "id": "gemini-3-flash",
             "name": "Gemini 3 Flash",
             "api": "google-generative-ai",
@@ -181,23 +147,6 @@
               "input": 0.075,
               "output": 0.3,
               "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "contextWindow": 1048576,
-            "maxTokens": 65536
-          },
-          {
-            "id": "gemini-2.5-flash",
-            "name": "Gemini 2.5 Flash",
-            "api": "google-generative-ai",
-            "reasoning": false,
-            "input": [
-              "text"
-            ],
-            "cost": {
-              "input": 0.075,
-              "output": 0.3,
-              "cacheRead": 0.025,
               "cacheWrite": 0
             },
             "contextWindow": 1048576,
@@ -292,12 +241,9 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "moonshot/kimi-k2.5",
+        "primary": "google/gemini-3-flash",
         "fallbacks": [
-          "google/gemini-3-flash",
-          "google/gemini-2.5-flash",
           "moonshot/kimi-k2.5",
-          "ollama/kimi-k2.5:cloud"
         ]
       },
       "models": {
@@ -318,20 +264,11 @@
         "google/gemini-3-flash": {
           "alias": "gemini"
         },
-        "google/gemini-3-pro": {
-          "alias": "geminipro"
-        },
-        "google/gemini-2.5-flash": {
-          "alias": "gemini2"
-        },
         "moonshot/kimi-k2.5": {
           "alias": "kimi"
         },
         "xai/grok-4-1-fast": {
           "alias": "grokfast"
-        },
-        "xai/grok-4-1": {
-          "alias": "grok"
         },
         "ollama/kimi-k2.5:cloud": {
           "alias": "kimicloud"
@@ -386,7 +323,7 @@
     "list": [
       {
         "id": "main",
-        "model": "moonshot/kimi-k2.5",
+        "model": "google/gemini-3-flash",
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
@@ -428,10 +365,6 @@
           "prefer": "path"
         },
         "models": [
-          {
-            "provider": "moonshot",
-            "model": "kimi-k2.5"
-          },
           {
             "provider": "google",
             "model": "gemini-3-flash"
