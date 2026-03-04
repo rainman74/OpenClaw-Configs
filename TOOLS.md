@@ -325,66 +325,9 @@ If conflicts occur:
 - Move setup/path/dependency/platform details to /TOOLS_ENV.md.
 - Remove only contradictory or duplicate runtime directives.
 
-## Installed Skills
-
-### bird (Twitter/X CLI)
-**Pfad:** `/volume1/homes/clawy/.local/bin/bird`
-**Version:** 0.8.0
-**Auth:** Cookies aus `~/workspace/twitter-cookies.txt`
-
-**Verwendung:**
-```bash
-bird whoami                                           # Account prüfen
-bird home --plain                                     # Home-Timeline
-bird search "query" --plain                           # Suchen
-bird tweet "Text"                                     # Twittern
-bird read <tweet-url>                                 # Tweet lesen
-bird user-tweets <handle>                             # User-Timeline
-```
-
-### gog (Google Workspace CLI)
-**Pfad:** `/volume1/homes/clawy/.local/bin/gog`
-**Version:** v0.11.0
-**Auth:** OAuth2 via `GOG_ACCOUNT`
-**Keyring-Passwort:** `GOG_KEYRING_PASSWORD`
-
-# Gmail
-gog gmail search 'newer_than:7d' --max 10 --plain
-gog gmail messages search "in:inbox from:example.com" --max 20
-gog gmail send --to recipient@example.com --subject "Betreff" --body "Nachricht"
-
-# Kalender
-gog calendar events primary --from 2026-03-01 --to 2026-03-10
-gog calendar create primary --summary "Meeting" --from "2026-03-05T10:00:00" --to "2026-03-05T11:00:00"
-gog calendar colors
-
-# Drive
-gog drive search "query" --max 10
-gog drive list --max 20
-
-# Kontakte
-gog contacts list --max 20
-
-# Sheets
-gog sheets get <sheetId> "Tab!A1:D10" --json
-gog sheets update <sheetId> "Tab!A1:B2" --values-json '[["A","B"],["1","2"]]'
-
-# Docs
-gog docs export <docId> --format txt --out /tmp/doc.txt
-gog docs cat <docId>
-```
-
-**Services:** calendar, contacts, docs, drive, gmail, sheets
-
----
-
-### gemini (Google Gemini CLI)
-**Pfad:** `/volume1/homes/clawy/.local/bin/gemini`
-**Auth:** `GEMINI_API_KEY`
-
 ## Validation Checklist
-- [ ] Contains runtime behavior only.
-- [ ] Contains no setup/install/dependency provisioning details.
-- [ ] Includes response/failure contracts for tool outputs.
-- [ ] Includes deterministic media and provider runtime behavior.
-- [ ] Preserves prior valid runtime directives unless contradictory.
+- [x] Contains runtime behavior only.
+- [x] Contains no setup/install/dependency provisioning details.
+- [x] Includes response/failure contracts for tool outputs.
+- [x] Includes deterministic media and provider runtime behavior.
+- [x] Preserves prior valid runtime directives unless contradictory.

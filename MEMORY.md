@@ -143,8 +143,8 @@ If conflicts occur:
 - Use deterministic wording and minimize ambiguity.
 
 ## Validation Checklist
-- [ ] Contains global policy only.
-- [ ] Contains no tool invocation/runtime mechanics.
-- [ ] Contains no setup/install/dependency/path instructions.
-- [ ] Preserves valid non-contradictory policy requirements.
-- [ ] No contradictions with /TOOLS.md or /TOOLS_ENV.md.
+- [x] Contains global policy only.
+- [x] Contains no tool invocation/runtime mechanics.
+- [x] Contains no setup/install/dependency/path instructions.
+- [x] Preserves valid non-contradictory policy requirements.
+- [x] No contradictions with /TOOLS.md or /TOOLS_ENV.md.
