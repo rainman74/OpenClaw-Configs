@@ -194,6 +194,17 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 - Provider runtime failover conditions include auth errors, rate-limit errors, and empty valid result sets.
 
 ### Domain-Specific Runtime Rules
+- PDF generation runtime behavior:
+  - PDF output may be generated with the headless browser workflow when PDF export is requested.
+  - PDF documents must be generated without emojis to ensure clean, predictable rendering across viewers and fonts.
+  - Before every PDF generation run, clear the relevant browser/render cache to prevent reuse of stale assets.
+  - Community best-practice alignment (mandatory):
+    - embed or use deterministic fallback fonts for all required glyphs,
+    - enforce print-focused CSS (`@page`, margins, page-break rules) for stable pagination,
+    - normalize locale/timezone and freeze dynamic timestamps where reproducibility is required,
+    - validate PDF output after generation (file exists, size > 0, expected page count/title when available),
+    - use deterministic file naming/versioning and avoid overwriting prior artifacts without intent,
+    - keep source HTML/CSS and generation parameters traceable for audit/debug reproducibility.
 - PDF analysis triage (cost-control gate):
   - Before any deep PDF extraction, run a lightweight document-type check and classify each input as:
     1. text-native PDF (selectable/searchable text available),
