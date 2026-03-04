@@ -176,6 +176,51 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   - preferred voice: Kathja (Edge TTS)
   - default speaker: Kitchen HomePod
 
+
+## Installed CLI Skills and Integrations (Environment Inventory)
+
+### bird (Twitter/X CLI)
+- Binary path: `/volume1/homes/clawy/.local/bin/bird`
+- Version reference: `0.8.0`
+- Auth source: cookies file `~/workspace/twitter-cookies.txt`
+- Example environment usage:
+  ```bash
+  bird whoami
+  bird home --plain
+  bird search "query" --plain
+  bird tweet "Text"
+  bird read <tweet-url>
+  bird user-tweets <handle>
+  ```
+
+### gog (Google Workspace CLI)
+- Binary path: `/volume1/homes/clawy/.local/bin/gog`
+- Version reference: `v0.11.0`
+- Auth sources:
+  - account selector: `GOG_ACCOUNT`
+  - keyring secret: `GOG_KEYRING_PASSWORD`
+- Service coverage reference: calendar, contacts, docs, drive, gmail, sheets
+- Example environment usage:
+  ```bash
+  gog gmail search 'newer_than:7d' --max 10 --plain
+  gog gmail messages search "in:inbox from:example.com" --max 20
+  gog gmail send --to recipient@example.com --subject "Betreff" --body "Nachricht"
+  gog calendar events primary --from 2026-03-01 --to 2026-03-10
+  gog calendar create primary --summary "Meeting" --from "2026-03-05T10:00:00" --to "2026-03-05T11:00:00"
+  gog calendar colors
+  gog drive search "query" --max 10
+  gog drive list --max 20
+  gog contacts list --max 20
+  gog sheets get <sheetId> "Tab!A1:D10" --json
+  gog sheets update <sheetId> "Tab!A1:B2" --values-json '[["A","B"],["1","2"]]'
+  gog docs export <docId> --format txt --out /tmp/doc.txt
+  gog docs cat <docId>
+  ```
+
+### gemini (Google Gemini CLI)
+- Binary path: `/volume1/homes/clawy/.local/bin/gemini`
+- Auth source: `GEMINI_API_KEY`
+
 ## Structure
 This file intentionally excludes:
 - tool behavior policy,
@@ -217,8 +262,8 @@ If conflicts occur:
 - Remove only contradictory/obsolete environment entries.
 
 ## Validation Checklist
-- [ ] Contains environment/runtime/setup requirements only.
-- [ ] Contains no behavior policy or response contract rules.
-- [ ] Explicitly covers Linux ARM64 and Windows x64.
-- [ ] Includes vars, paths, prefixes, binaries, and dependency references.
-- [ ] No contradictions with /MEMORY.md or /TOOLS.md.
+- [x] Contains environment/runtime/setup requirements only.
+- [x] Contains no behavior policy or response contract rules.
+- [x] Explicitly covers Linux ARM64 and Windows x64.
+- [x] Includes vars, paths, prefixes, binaries, and dependency references.
+- [x] No contradictions with /MEMORY.md or /TOOLS.md.
