@@ -276,7 +276,7 @@
       "model": {
         "primary": "google/gemini-3-flash",
         "fallbacks": [
-          "moonshot/kimi-k2.5",
+          "moonshot/kimi-k2.5"
         ]
       },
       "models": {
@@ -369,6 +369,7 @@
     ]
   },
   "tools": {
+    "profile": "messaging",
     "web": {
       "search": {
         "apiKey": "${BRAVE_API_KEY}"
@@ -540,7 +541,7 @@
       "replyToMode": "off",
       "groups": {
         "-1000000000000": {
-          "requireMention": false,
+          "requireMention": true,
           "enabled": true,
           "allowFrom": [
             "*"
@@ -564,9 +565,9 @@
       "streaming": "off",
       "mediaMaxMb": 50,
       "actions": {
-        "deleteMessage": false,
-        "sendMessage": true,
         "reactions": true,
+        "sendMessage": true,
+        "deleteMessage": false,
         "sticker": true
       },
       "reactionNotifications": "all",
@@ -635,9 +636,6 @@
   },
   "plugins": {
     "entries": {
-      "openclaw-web-search": {
-        "enabled": true
-      },
       "telegram": {
         "enabled": true
       },

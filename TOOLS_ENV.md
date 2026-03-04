@@ -32,6 +32,9 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
 - `FAL_AI_KEY`
 - `GEMINI_API_KEY`
 - `BRAVE_API_KEY`
+- `GOG_KEYRING_PASSWORD`
+- `GOG_ACCOUNT`
+
 
 ### Workspace and Runtime Path Model
 - Canonical workspace roots:
