@@ -240,15 +240,19 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
   - if Bot API download is skipped because of size constraints, log the reason explicitly (for example `exceeds 20MB`).
   - if URL-extractor fallback (`yt-dlp`) is used, log that fallback decision explicitly with source URL.
 - TTS runtime behavior:
-  - remove internal markers from visible output (`[[tts]]`, `[[/tts]]`, `<tts>`, `</tts>`),
-  - TTS markers must never leak into user-visible responses,
+  - use explicit TTS tags only when spoken output is intended (user request, active voice mode, or configured TTS action),
+  - for tagged TTS mode, keep tags in the assistant message payload so the runtime can trigger speech output,
+  - accepted tag pairs are `[[tts]] ... [[/tts]]` (preferred) and `<tts> ... </tts>` (compatibility only),
+  - do not strip or rewrite valid TTS tags before runtime consumption,
   - TTS tagged mode rules:
     - `[[tts]]` and `[[/tts]]` must wrap the complete text of a single assistant message,
+    - do not mix tag formats in one message (choose one pair and keep it consistent),
     - do not start a TTS block in one message and end it in another,
     - do not send additional assistant messages between `[[tts]]` and `[[/tts]]`,
   - if a response must be split into multiple messages:
     - each message that should be spoken must contain its own complete `[[tts]] ... [[/tts]]` block,
     - prefer one single `[[tts]]...[[/tts]]` message instead of multiple chunks,
+  - when no spoken output is intended, respond without TTS tags,
   - name generated audio files with topic-based, user-meaningful names (not purely technical/timestamp-like filenames).
   - media delivery visibility must not be replaced by hidden control text.
 - `cron.add` runtime behavior:
