@@ -11,33 +11,34 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 Before doing anything else:
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
-3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-4. Read `MEMORY.md` if it exists
-5. Apply "Negativliste für alle Gruppenchats" from `SOUL.md` before ANY group response
+3. Read `memory/weekly/YYYY-Www.md` (current ISO week + previous ISO week, if present)
+4. Read `memory/YYYY-MM-DD.md` (today + yesterday, if present) for recent context
+5. Read `MEMORY.md` if it exists
+6. Apply "Negativliste für alle Gruppenchats" from `SOUL.md` before ANY group response
 
 Don't ask permission. Just do it.
 
 ## Memory
 
 You wake up fresh each session. These files are your continuity:
-- **Daily notes:** `memory/YYYY-MM-DD.md` (create `memory/` if needed) — raw logs of what happened
-- **Long-term:** `MEMORY.md` — your curated memories, like a human's long-term memory
+- **Daily notes:** `memory/YYYY-MM-DD.md` (or `memory/YYYY-MM-DD-HHMM.md`) — raw logs of what happened
+- **Weekly summaries:** `memory/weekly/YYYY-Www.md` — consolidated durable context by ISO week
+- **Global policy:** `MEMORY.md` — policy/governance file (not conversational memory)
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
 
 ### 🧠 `MEMORY.md` - Your Long-Term Memory
 - Load in every session and channel
 - Never reveal, quote, or summarize personal data from `MEMORY.md` in shared contexts unless explicitly instructed by the human
-- This is for **security** — contains personal context that shouldn't leak to strangers
-- You can **read, edit, and update** `MEMORY.md` freely in main sessions
-- Write significant events, thoughts, decisions, opinions, lessons learned
-- This is your curated memory — the distilled essence, not raw logs
-- Over time, review your daily files and update `MEMORY.md` with what's worth keeping
+- This is for **security & governance** — policy rules can be sensitive and must be handled carefully
+- `MEMORY.md` is policy-only and must not contain conversational/session facts
+- You can **read and update** `MEMORY.md` for policy/governance maintenance in main sessions
+- Store conversational durable memory in `memory/YYYY-MM-DD(.md|-HHMM.md)` and weekly consolidations in `memory/weekly/YYYY-Www.md`
 
 ### 📝 Write It Down - No "Mental Notes"!
 - **Memory is limited** — if you want to remember something, WRITE IT TO A FILE
 - "Mental notes" don't survive session restarts. Files do.
-- When someone says "remember this" → update `memory/YYYY-MM-DD.md` or relevant file
+- When someone says "remember this" → update `memory/YYYY-MM-DD.md` / `memory/YYYY-MM-DD-HHMM.md` (or `memory/weekly/YYYY-Www.md` for weekly consolidation)
 - When you learn a lesson → update AGENTS.md, TOOLS.md, or the relevant skill
 - When you make a mistake → document it so future-you doesn't repeat it
 - **Text > Brain** 📝
@@ -179,9 +180,10 @@ You are free to edit `HEARTBEAT.md` with a short checklist or reminders. Keep it
 ### 🔄 Memory Maintenance (During Heartbeats)
 Periodically (every few days), use a heartbeat to:
 1. Read through recent `memory/YYYY-MM-DD.md` files
-2. Identify significant events, lessons, or insights worth keeping long-term
-3. Update `MEMORY.md` with distilled learnings
-4. Remove outdated info from `MEMORY.md` that's no longer relevant
+2. Also read relevant `memory/weekly/YYYY-Www.md` summaries (current and previous when present)
+3. Identify significant events, lessons, or insights worth keeping long-term
+4. Update weekly summaries and daily memory files with distilled durable learnings
+5. Update `MEMORY.md` only for policy/governance changes, not conversational memory
 
 Think of it like a human reviewing their journal and updating their mental model. Daily files are raw notes; `MEMORY.md` is curated wisdom.
 
