@@ -49,26 +49,27 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
 ### OpenClaw CLI Environment (Linux reference)
 - OpenClaw CLI invocation prefix:
   ```bash
-  HOME="/volume1/openclaw" \
-  OPENCLAW_HOME="/volume1/openclaw" \
-  PATH="/volume1/homes/clawy/.local/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/usr/syno/bin:/sbin:/usr/sbin:/opt/bin:/opt/sbin:$PATH" \
-  /usr/local/bin/tsx /volume1/openclaw/openclaw.mjs [command]
+  PATH="/volume1/homes/clawy/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/syno/bin"
+  export HOME="$HOME_DIR"
+  nohup node "$HOME_DIR/dist/index.js" [command] <params>
   ```
+- Runtime note: `export HOME="$HOME_DIR"` is important so runtime config, credentials, and profile-relative paths resolve to the intended OpenClaw home.
 
-### Bird / Clawhub Environment (Linux reference)
-- Binary paths:
-  - `~/.local/share/pnpm/global/5/node_modules/.bin/bird`
-  - `~/.local/share/pnpm/global/5/node_modules/.bin/clawhub`
-- Prefix requirements:
+### Bird Environment (Linux reference)
+- Binary path:
+  - `/volume1/homes/clawy/.local/bin/bird`
+- Prefix requirement:
   - `HOME=/volume1/homes/clawy bash -lc 'bird [args]'`
-  - `HOME=/volume1/homes/clawy bash -lc 'clawhub [args]'`
-- Runtime note: use `bash -lc` context for these binaries.
+- Auth environment:
+  - `AUTH_TOKEN`
+  - `CT0`
+- Runtime note: use `bash -lc` context for this binary.
 
 ### yt-dlp / ffmpeg / ffprobe Environment (Linux reference)
 - Binary paths:
-  - yt-dlp: `~/.local/bin/yt-dlp`
-  - ffmpeg: `~/bin/ffmpeg`
-  - ffprobe: `~/bin/ffprobe`
+  - yt-dlp: `/volume1/homes/clawy/.local/bin/yt-dlp`
+  - ffmpeg: `/var/services/homes/clawy/bin/ffmpeg`
+  - ffprobe: `/var/services/homes/clawy/bin/ffprobe`
 - Prefix examples:
   - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; yt-dlp [args]..."`
   - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; ffmpeg [args]..."`
@@ -121,7 +122,7 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   - `sd3-medium`
 
 ### Pandoc / Ghostscript / Deno Environment
-- pandoc path reference: `~/bin/pandoc`
+- pandoc path reference: `/var/services/homes/clawy/bin/pandoc`
 - Ghostscript available in PATH
 - Deno path reference: `/usr/local/bin/deno` (symlink to `/opt/bin/deno`)
 - Deno example:
@@ -160,7 +161,7 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   ```
 - Example:
   ```bash
-  pnpm add -w bird clawhub gemini
+  pnpm add -w bird gemini
   ```
 - Skill activation environment notes:
   - update `openclaw.json` skill list/config entries
@@ -177,49 +178,100 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   - default speaker: Kitchen HomePod
 
 
-## Installed CLI Skills and Integrations (Environment Inventory)
+## Available Tools (Unified Environment Inventory)
+
+Standard fields used below:
+- **Binary/Entry**: executable or script entry path.
+- **Auth/Env**: required environment variables or credential source.
+- **Execution Context**: required prefix/profile/runtime context.
+- **Notes**: environment-specific capability references.
+
+### OpenClaw CLI
+- **Binary/Entry**: `node "$HOME_DIR/dist/index.js"`
+- **Auth/Env**: `HOME` should be exported to `"$HOME_DIR"` for predictable runtime config resolution.
+- **Execution Context**:
+  ```bash
+  PATH="/volume1/homes/clawy/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/syno/bin"
+  export HOME="$HOME_DIR"
+  nohup node "$HOME_DIR/dist/index.js" [command] <params>
+  ```
+- **Notes**: this is the canonical Linux OpenClaw CLI entrypoint (not `tsx`).
 
 ### bird (Twitter/X CLI)
-- Binary path: `/volume1/homes/clawy/.local/bin/bird`
-- Version reference: `0.8.0`
-- Auth source: cookies file `~/workspace/twitter-cookies.txt`
-- Example environment usage:
-  ```bash
-  bird whoami
-  bird home --plain
-  bird search "query" --plain
-  bird tweet "Text"
-  bird read <tweet-url>
-  bird user-tweets <handle>
-  ```
+- **Binary/Entry**: `/volume1/homes/clawy/.local/bin/bird`
+- **Auth/Env**: `AUTH_TOKEN`, `CT0`
+- **Execution Context**: `HOME=/volume1/homes/clawy bash -lc 'bird [args]'`
+- **Notes**: version reference `0.8.0`.
 
 ### gog (Google Workspace CLI)
-- Binary path: `/volume1/homes/clawy/.local/bin/gog`
-- Version reference: `v0.11.0`
-- Auth sources:
-  - account selector: `GOG_ACCOUNT`
-  - keyring secret: `GOG_KEYRING_PASSWORD`
-- Service coverage reference: calendar, contacts, docs, drive, gmail, sheets
-- Example environment usage:
-  ```bash
-  gog gmail search 'newer_than:7d' --max 10 --plain
-  gog gmail messages search "in:inbox from:example.com" --max 20
-  gog gmail send --to recipient@example.com --subject "Betreff" --body "Nachricht"
-  gog calendar events primary --from 2026-03-01 --to 2026-03-10
-  gog calendar create primary --summary "Meeting" --from "2026-03-05T10:00:00" --to "2026-03-05T11:00:00"
-  gog calendar colors
-  gog drive search "query" --max 10
-  gog drive list --max 20
-  gog contacts list --max 20
-  gog sheets get <sheetId> "Tab!A1:D10" --json
-  gog sheets update <sheetId> "Tab!A1:B2" --values-json '[["A","B"],["1","2"]]'
-  gog docs export <docId> --format txt --out /tmp/doc.txt
-  gog docs cat <docId>
-  ```
+- **Binary/Entry**: `/volume1/homes/clawy/.local/bin/gog`
+- **Auth/Env**: `GOG_ACCOUNT`, `GOG_KEYRING_PASSWORD`
+- **Execution Context**: host PATH/profile context.
+- **Notes**: version reference `v0.11.0`; service coverage includes calendar, contacts, docs, drive, gmail, sheets.
 
 ### gemini (Google Gemini CLI)
-- Binary path: `/volume1/homes/clawy/.local/bin/gemini`
-- Auth source: `GEMINI_API_KEY`
+- **Binary/Entry**: `/volume1/homes/clawy/.local/bin/gemini`
+- **Auth/Env**: `GEMINI_API_KEY`
+- **Execution Context**: host PATH/profile context.
+- **Notes**: Gemini CLI integration available when key is configured.
+
+### yt-dlp
+- **Binary/Entry**: `/volume1/homes/clawy/.local/bin/yt-dlp`
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: `HOME=/volume1/homes/clawy bash -c ". ~/.profile; yt-dlp [args]..."`
+- **Notes**: profile sourcing required in Linux reference runtime.
+
+### ffmpeg
+- **Binary/Entry**: `/var/services/homes/clawy/bin/ffmpeg`
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: `HOME=/volume1/homes/clawy bash -c ". ~/.profile; ffmpeg [args]..."`
+- **Notes**: reference build supports AAC decoder.
+
+### ffprobe
+- **Binary/Entry**: `/var/services/homes/clawy/bin/ffprobe`
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: `HOME=/volume1/homes/clawy bash -c ". ~/.profile; ffprobe [args]..."`
+- **Notes**: profile sourcing required in Linux reference runtime.
+
+### pandoc
+- **Binary/Entry**: `/var/services/homes/clawy/bin/pandoc`
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: host PATH/profile context.
+- **Notes**: available for document conversion workflows.
+
+### Ghostscript
+- **Binary/Entry**: `gs` (from PATH)
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: host PATH/profile context.
+- **Notes**: runtime availability expected in Linux reference environment.
+
+### Deno
+- **Binary/Entry**: `/usr/local/bin/deno` (symlink to `/opt/bin/deno`)
+- **Auth/Env**: permissions via Deno allow flags.
+- **Execution Context**:
+  ```bash
+  deno run --allow-net --allow-read script.ts
+  deno run --allow-net --allow-read --allow-write=<workspace>/tmp/ script.ts
+  ```
+- **Notes**: write access should stay scoped to processing path when artifacts are produced.
+
+### OpenAI Image Generation (skill script)
+- **Binary/Entry**: `python /volume1/openclaw/skills/openai-image-gen/scripts/gen.py`
+- **Auth/Env**: `OPENAI_API_KEY`
+- **Execution Context**: Python runtime with configured key.
+- **Notes**: model references `dall-e-3` and `dall-e-2`.
+
+### OpenAI Whisper (skill script)
+- **Binary/Entry**: `bash /volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh`
+- **Auth/Env**: `OPENAI_API_KEY`
+- **Execution Context**: Bash runtime with configured key.
+- **Notes**: supports m4a, mp3, ogg, wav, and other Whisper-supported formats.
+
+### fal.ai API integration
+- **Binary/Entry**: `curl` against `https://fal.run/fal-ai/...`
+- **Auth/Env**: `FAL_AI_KEY`
+- **Execution Context**: HTTP POST with JSON payload.
+- **Notes**: model references include `fast-sdxl`, `flux-fast`, `sd3-medium`.
 
 ## Structure
 This file intentionally excludes:
@@ -242,7 +294,7 @@ Those belong in /TOOLS.md and /MEMORY.md.
 - Reference deployment uses `/volume1/...` paths.
 - OpenClaw base path: `/volume1/openclaw`.
 - Prefix-based execution is required where profile-initialized PATH is needed.
-- Ensure runtime availability for tsx, pnpm bins, yt-dlp, ffmpeg/ffprobe, pandoc, ghostscript, deno.
+- Ensure runtime availability for node, pnpm bins, yt-dlp, ffmpeg/ffprobe, pandoc, ghostscript, deno.
 
 ## Interaction With Other Files
 ### File Hierarchy
