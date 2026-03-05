@@ -242,6 +242,14 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 - TTS runtime behavior:
   - remove internal markers from visible output (`[[tts]]`, `[[/tts]]`, `<tts>`, `</tts>`),
   - TTS markers must never leak into user-visible responses,
+  - TTS tagged mode rules:
+    - `[[tts]]` and `[[/tts]]` must wrap the complete text of a single assistant message,
+    - do not start a TTS block in one message and end it in another,
+    - do not send additional assistant messages between `[[tts]]` and `[[/tts]]`,
+  - if a response must be split into multiple messages:
+    - each message that should be spoken must contain its own complete `[[tts]] ... [[/tts]]` block,
+    - prefer one single `[[tts]]...[[/tts]]` message instead of multiple chunks,
+  - name generated audio files with topic-based, user-meaningful names (not purely technical/timestamp-like filenames).
   - media delivery visibility must not be replaced by hidden control text.
 - `cron.add` runtime behavior:
   - confirm creation only after explicit success,
