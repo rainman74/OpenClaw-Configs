@@ -468,7 +468,7 @@
       "edge": {
         "voice": "de-DE-KatjaNeural",
         "lang": "de-DE",
-        "outputFormat": "mp3"
+        "outputFormat": "audio-24khz-48kbitrate-mono-mp3"
       },
       "maxTextLength": 4000
     }

@@ -101,7 +101,7 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   ```
 - Format support references:
   - m4a
-  - mp3
+  - audio-24khz-48kbitrate-mono-mp3
   - ogg
   - wav
   - other whisper-supported formats
@@ -264,7 +264,7 @@ Standard fields used below:
 - **Binary/Entry**: `bash /volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh`
 - **Auth/Env**: `OPENAI_API_KEY`
 - **Execution Context**: Bash runtime with configured key.
-- **Notes**: supports m4a, mp3, ogg, wav, and other Whisper-supported formats.
+- **Notes**: supports m4a, audio-24khz-48kbitrate-mono-mp3, ogg, wav, and other Whisper-supported formats.
 
 ### fal.ai API integration
 - **Binary/Entry**: `curl` against `https://fal.run/fal-ai/...`
