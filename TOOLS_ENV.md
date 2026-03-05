@@ -98,6 +98,7 @@ Canonical binary/script paths:
 - `gog`: `/volume1/homes/clawy/.local/bin/gog`
 - `gemini`: `/volume1/homes/clawy/.local/bin/gemini`
 - `python3` (Entware): `/opt/bin/python3`
+- `chromium` wrapper (headless/browser runtime): `/volume1/@chromium/bin/chromium-wrapper`
 - Whisper skill entry: `/volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh`
 - Image skill entry: `/volume1/openclaw/skills/openai-image-gen/scripts/gen.py`
 
@@ -113,9 +114,19 @@ command -v deno || true
 command -v bird || true
 command -v gemini || true
 command -v gog || true
+[ -x /volume1/@chromium/bin/chromium-wrapper ] && echo chromium-wrapper-ok || echo chromium-wrapper-missing
 [ -x /volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh ] && echo whisper-script-ok || echo whisper-script-missing
 '
 ```
+
+### Web Access Environment
+- Brave Search API integration is available when `BRAVE_API_KEY` is configured.
+- Headless Chromium runtime is available via wrapper:
+  - `/volume1/@chromium/bin/chromium-wrapper`
+- Typical remote-debugging endpoint reference: `http://127.0.0.1:18800/json/list`.
+- Preferred web workflow:
+  1. discover sources via Brave Search,
+  2. open/read target pages with headless browser tooling.
 
 ### yt-dlp / ffmpeg / ffprobe Environment (Linux reference)
 - Binaries (via PATH):
@@ -324,6 +335,18 @@ Standard fields used below:
 - **Auth/Env**: `FAL_AI_KEY`
 - **Execution Context**: HTTP POST with JSON payload.
 - **Notes**: model references include `fast-sdxl`, `flux-fast`, `sd3-medium`.
+
+### Brave Search API integration
+- **Binary/Entry**: OpenClaw Brave web-search integration (API-backed tool call).
+- **Auth/Env**: `BRAVE_API_KEY`
+- **Execution Context**: normal OpenClaw runtime context.
+- **Notes**: use for discovery/search before deep page fetch.
+
+### Chromium headless browser runtime
+- **Binary/Entry**: `/volume1/@chromium/bin/chromium-wrapper`
+- **Auth/Env**: no dedicated API key; inherits runtime environment.
+- **Execution Context**: host runtime; supports headless mode and local CDP debugging.
+- **Notes**: canonical fallback for direct page reading and rendering.
 
 ## Structure
 This file intentionally excludes:

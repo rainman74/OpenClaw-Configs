@@ -150,6 +150,10 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 ### Browser Runtime Rules
 - Terminate the browser after 15 minutes of inactivity to conserve resources.
 - Avoid JavaScript-blocked websites when using `web_fetch`.
+- Web access is available and must be used when needed: 
+  1. `brave_web_search` (or equivalent Brave Search API integration) for discovery/search,
+  2. headless browser browsing (`web_fetch` / OpenClaw-managed Chromium) for direct page reading.
+- Do not claim "no web access" unless capability checks failed with explicit command evidence according to the Tool Availability Claim Gate.
 
 ### Image Selection and Provider Runtime Rules
 - The OpenClaw-managed browser is an allowed fallback image source for both the main agent and authorized sub-agents.
