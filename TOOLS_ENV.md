@@ -64,6 +64,59 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   - `CT0`
 - Runtime note: use `bash -lc` context for this binary.
 
+### Tool Discovery and Evidence-First Diagnostics (Community Pattern)
+- Community-standard agent setups avoid generic "tool not available" statements without command evidence.
+- Require explicit discovery commands before declaring a missing capability:
+  - `command -v <tool>`
+  - `test -x <absolute-path>`
+  - `ls -l <absolute-path>` (optional for symlink verification)
+- Preferred decision order:
+  1. absolute path exists/executable,
+  2. PATH lookup in required profile context,
+  3. only then declare missing tool.
+- Missing-tool reports should include the failed command and exit code/stderr summary.
+
+### Canonical Linux ARM64 Tool Paths (derived from install scripts)
+- User home (logical): `/volume1/homes/clawy`
+- User home (Synology runtime alias): `/var/services/homes/clawy`
+- User-local bin: `/volume1/homes/clawy/.local/bin`
+- User bin (runtime-resolved): `/var/services/homes/clawy/bin`
+- Entware bin: `/opt/bin`
+- OpenClaw root: `/volume1/openclaw`
+- Skill root: `/volume1/openclaw/skills`
+
+Canonical binary/script paths:
+- Synology note: `/volume1/homes/clawy` and `/var/services/homes/clawy` can resolve to the same home; diagnostics should trust `command -v` output from the active shell context.
+
+- `yt-dlp`: `/volume1/homes/clawy/.local/bin/yt-dlp`
+- `ffmpeg`: `/var/services/homes/clawy/bin/ffmpeg` (symlinked to `/usr/bin/ffmpeg` in installer)
+- `ffprobe`: `/var/services/homes/clawy/bin/ffprobe`
+- `pandoc`: `/var/services/homes/clawy/bin/pandoc`
+- `deno`: `/volume1/homes/clawy/.local/bin/deno`
+- `bird`: `/volume1/homes/clawy/.local/bin/bird`
+- `gogcli`: `/volume1/homes/clawy/.local/bin/gogcli`
+- `gog`: `/volume1/homes/clawy/.local/bin/gog`
+- `gemini`: `/volume1/homes/clawy/.local/bin/gemini`
+- `python3` (Entware): `/opt/bin/python3`
+- Whisper skill entry: `/volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh`
+- Image skill entry: `/volume1/openclaw/skills/openai-image-gen/scripts/gen.py`
+
+Recommended diagnostic preflight (Linux):
+```bash
+HOME=/volume1/homes/clawy bash -lc '
+set -e
+command -v yt-dlp || true
+command -v ffmpeg || true
+command -v ffprobe || true
+command -v pandoc || true
+command -v deno || true
+command -v bird || true
+command -v gemini || true
+command -v gog || true
+[ -x /volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh ] && echo whisper-script-ok || echo whisper-script-missing
+'
+```
+
 ### yt-dlp / ffmpeg / ffprobe Environment (Linux reference)
 - Binaries (via PATH):
   - `yt-dlp`
