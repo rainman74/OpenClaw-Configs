@@ -372,8 +372,20 @@
     "profile": "full",
     "web": {
       "search": {
-        "apiKey": "${BRAVE_API_KEY}"
-      }
+        "enabled": true,
+        "apiKey": "${BRAVE_API_KEY}",
+        "maxResults": 5,
+        "timeoutSeconds": 30,
+        "cacheTtlMinutes": 15
+      },
+      "fetch": {
+        "enabled": true,
+        "maxChars": 50000,
+        "maxCharsCap": 50000,
+        "timeoutSeconds": 30,
+        "cacheTtlMinutes": 15,
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+      },
     },
     "media": {
       "image": {
@@ -439,7 +451,14 @@
     "exec": {
       "security": "full",
       "ask": "off"
-    }
+    },
+    "agentToAgent": {
+      "enabled": true,
+      "allow": ["Eva", "Clawy"],
+    },
+    "sessions": {
+      "visibility": "all"
+    },
   },
   "messages": {
     "groupChat": {
