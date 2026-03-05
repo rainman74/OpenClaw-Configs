@@ -41,9 +41,9 @@ Highest authority.
 ### Persistent Session Memory Rules
 - Memory paths in this section are workspace-root relative (e.g., `memory/...` means `<workspace>/memory/...`, not filesystem `/memory/...`).
 - Session memory sources are restricted to:
-  - daily files: `/memory/YYYY-MM-DD.md`
+  - daily files: `/memory/YYYY-MM-DD.md` or `/memory/YYYY-MM-DD-HHMM.md`
   - weekly summaries: `/memory/weekly/YYYY-Www.md`
-- Any other memory filename pattern is invalid and must never be created (for example timestamp/event files such as `/memory/2026-02-26-1448.md` or `/memory/2026-02-26-missed-question.md`).
+- Any other memory filename pattern is invalid and must never be created (for example event/slugs such as `/memory/2026-02-26-missed-question.md`).
 - Internal runtime hooks (for example `hooks.internal.entries.session-memory`) may keep ephemeral in-session state, but they do not replace or override the file-backed durable memory policy above.
 - `/MEMORY.md` is policy-only and must not contain conversational/session facts.
 - Session bootstrap (before normal answering):
@@ -56,7 +56,7 @@ Highest authority.
   5. If both weekly and daily context exist, prefer daily file details over weekly summaries on conflicts.
   6. Use loaded content as long-term context for the active conversation.
 - Durable writes are allowed in:
-  - `/memory/YYYY-MM-DD.md` for normal durable memory updates
+  - `/memory/YYYY-MM-DD.md` or `/memory/YYYY-MM-DD-HHMM.md` for normal durable memory updates
   - `/memory/weekly/YYYY-Www.md` only for weekly consolidation outputs
 - Before any durable memory write, enforce canonical path validation:
   1. Normalize path before checks: decode URL encoding, convert `\` to `/`, collapse duplicate `/`, and resolve dot segments (`.`/`..`) without escaping repository root. Any raw path containing traversal intent must still be rejected.
@@ -87,7 +87,7 @@ Highest authority.
   5. If this was the only requested action, reply exactly: `OK WEEKLY READY`.
 - `NO_REPLY` is an internal control signal (not user-facing prose). Use it only where an integration contract expects it for memory-only operations.
 - If only memory writing was performed and no additional response is needed under that contract, emit exactly: `NO_REPLY`.
-- During compaction/memory-flush events, persist only durable items to `/memory/YYYY-MM-DD.md`; if nothing durable should be stored, return exactly `NO_REPLY`.
+- During compaction/memory-flush events, persist only durable items to `/memory/YYYY-MM-DD.md` or `/memory/YYYY-MM-DD-HHMM.md`; if nothing durable should be stored, return exactly `NO_REPLY`.
 ### Access and Write Authority Policy
 - Main session is authoritative for writes to persistent memory/config.
 - Sub-agents are read-only unless explicitly authorized.
