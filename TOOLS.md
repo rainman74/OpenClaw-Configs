@@ -25,7 +25,8 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 
 ### Tool Availability Claim Gate (mandatory before saying "tool missing")
 - Before stating a tool is unavailable, run a deterministic preflight check in the active runtime context.
-- A missing tool claim is valid only if at least one canonical check command failed with explicit evidence (`command not found`, non-zero status, or missing file path).
+- A missing tool claim is valid only after the full discovery sequence is exhausted and all relevant canonical checks failed with explicit evidence (`command not found`, non-zero status, or missing file path).
+- Any successful canonical check (absolute path executable, PATH resolution, or script entrypoint check) means the tool is available and must suppress a missing-tool claim.
 - If `TOOLS_ENV.md` provides an absolute binary path, test that path first; test PATH lookup second.
 - If PATH lookup fails but absolute path exists, use the absolute path and continue (do not claim missing tool).
 - If profile loading is required, execute checks with the documented prefix (for example `HOME=/volume1/homes/clawy bash -lc ...`).
