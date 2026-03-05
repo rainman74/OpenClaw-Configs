@@ -369,7 +369,7 @@
     ]
   },
   "tools": {
-    "profile": "messaging",
+    "profile": "full",
     "web": {
       "search": {
         "apiKey": "${BRAVE_API_KEY}"
