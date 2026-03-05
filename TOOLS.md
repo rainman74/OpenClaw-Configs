@@ -23,6 +23,22 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 - If /TOOLS_ENV.md defines a mandatory execution prefix, that prefix is required.
 - Runtime rule sections in this file must never be truncated.
 
+### Tool Availability Claim Gate (mandatory before saying "tool missing")
+- Before stating a tool is unavailable, run a deterministic preflight check in the active runtime context.
+- A missing tool claim is valid only after the full discovery sequence is exhausted and all relevant canonical checks failed with explicit evidence (`command not found`, non-zero status, or missing file path).
+- Any successful canonical check (absolute path executable, PATH resolution, or script entrypoint check) means the tool is available and must suppress a missing-tool claim.
+- If `TOOLS_ENV.md` provides an absolute binary path, test that path first; test PATH lookup second.
+- If PATH lookup fails but absolute path exists, use the absolute path and continue (do not claim missing tool).
+- If profile loading is required, execute checks with the documented prefix (for example `HOME=/volume1/homes/clawy bash -lc ...`).
+- User-facing missing-tool messages must include the exact failed check command and stderr summary.
+- Community baseline (MCP/agent ecosystems): capability declaration must be evidence-based (`which/command -v/test -x`) and never assumption-based from stale session memory.
+
+### Tool Capability Fallback Order
+1. Check configured absolute binary/script path from `TOOLS_ENV.md`.
+2. Check runtime PATH resolution in the required shell/profile context.
+3. Check script entrypoint path (for skill-based tools).
+4. Only then report unavailability with command evidence and proposed remediation.
+
 ### Runtime Response Contract
 - `{ ok: true }` (or an explicit documented equivalent) is required before claiming success.
 - `{ ok: false }` is failure.
