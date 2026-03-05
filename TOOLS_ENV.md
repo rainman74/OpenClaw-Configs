@@ -56,8 +56,7 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
 - Runtime note: `export HOME="$HOME_DIR"` is important so runtime config, credentials, and profile-relative paths resolve to the intended OpenClaw home.
 
 ### Bird Environment (Linux reference)
-- Binary path:
-  - `/volume1/homes/clawy/.local/bin/bird`
+- Binary: `bird` (via PATH)
 - Prefix requirement:
   - `HOME=/volume1/homes/clawy bash -lc 'bird [args]'`
 - Auth environment:
@@ -66,10 +65,10 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
 - Runtime note: use `bash -lc` context for this binary.
 
 ### yt-dlp / ffmpeg / ffprobe Environment (Linux reference)
-- Binary paths:
-  - yt-dlp: `/volume1/homes/clawy/.local/bin/yt-dlp`
-  - ffmpeg: `/var/services/homes/clawy/bin/ffmpeg`
-  - ffprobe: `/var/services/homes/clawy/bin/ffprobe`
+- Binaries (via PATH):
+  - `yt-dlp`
+  - `ffmpeg`
+  - `ffprobe`
 - Prefix examples:
   - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; yt-dlp [args]..."`
   - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; ffmpeg [args]..."`
@@ -122,9 +121,9 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   - `sd3-medium`
 
 ### Pandoc / Ghostscript / Deno Environment
-- pandoc path reference: `/var/services/homes/clawy/bin/pandoc`
+- pandoc binary reference: `pandoc` (via PATH)
 - Ghostscript available in PATH
-- Deno path reference: `/usr/local/bin/deno` (symlink to `/opt/bin/deno`)
+- Deno binary reference: `deno` (via PATH)
 - Deno example:
   ```bash
   deno run --allow-net --allow-read script.ts
@@ -198,43 +197,43 @@ Standard fields used below:
 - **Notes**: this is the canonical Linux OpenClaw CLI entrypoint (not `tsx`).
 
 ### bird (Twitter/X CLI)
-- **Binary/Entry**: `/volume1/homes/clawy/.local/bin/bird`
+- **Binary/Entry**: `bird`
 - **Auth/Env**: `AUTH_TOKEN`, `CT0`
 - **Execution Context**: `HOME=/volume1/homes/clawy bash -lc 'bird [args]'`
 - **Notes**: version reference `0.8.0`.
 
 ### gog (Google Workspace CLI)
-- **Binary/Entry**: `/volume1/homes/clawy/.local/bin/gog`
+- **Binary/Entry**: `gog`
 - **Auth/Env**: `GOG_ACCOUNT`, `GOG_KEYRING_PASSWORD`
 - **Execution Context**: host PATH/profile context.
 - **Notes**: version reference `v0.11.0`; service coverage includes calendar, contacts, docs, drive, gmail, sheets.
 
 ### gemini (Google Gemini CLI)
-- **Binary/Entry**: `/volume1/homes/clawy/.local/bin/gemini`
+- **Binary/Entry**: `gemini`
 - **Auth/Env**: `GEMINI_API_KEY`
 - **Execution Context**: host PATH/profile context.
 - **Notes**: Gemini CLI integration available when key is configured.
 
 ### yt-dlp
-- **Binary/Entry**: `/volume1/homes/clawy/.local/bin/yt-dlp`
+- **Binary/Entry**: `yt-dlp`
 - **Auth/Env**: no mandatory key in baseline setup.
 - **Execution Context**: `HOME=/volume1/homes/clawy bash -c ". ~/.profile; yt-dlp [args]..."`
 - **Notes**: profile sourcing required in Linux reference runtime.
 
 ### ffmpeg
-- **Binary/Entry**: `/var/services/homes/clawy/bin/ffmpeg`
+- **Binary/Entry**: `ffmpeg`
 - **Auth/Env**: no mandatory key in baseline setup.
 - **Execution Context**: `HOME=/volume1/homes/clawy bash -c ". ~/.profile; ffmpeg [args]..."`
 - **Notes**: reference build supports AAC decoder.
 
 ### ffprobe
-- **Binary/Entry**: `/var/services/homes/clawy/bin/ffprobe`
+- **Binary/Entry**: `ffprobe`
 - **Auth/Env**: no mandatory key in baseline setup.
 - **Execution Context**: `HOME=/volume1/homes/clawy bash -c ". ~/.profile; ffprobe [args]..."`
 - **Notes**: profile sourcing required in Linux reference runtime.
 
 ### pandoc
-- **Binary/Entry**: `/var/services/homes/clawy/bin/pandoc`
+- **Binary/Entry**: `pandoc`
 - **Auth/Env**: no mandatory key in baseline setup.
 - **Execution Context**: host PATH/profile context.
 - **Notes**: available for document conversion workflows.
@@ -246,7 +245,7 @@ Standard fields used below:
 - **Notes**: runtime availability expected in Linux reference environment.
 
 ### Deno
-- **Binary/Entry**: `/usr/local/bin/deno` (symlink to `/opt/bin/deno`)
+- **Binary/Entry**: `deno`
 - **Auth/Env**: permissions via Deno allow flags.
 - **Execution Context**:
   ```bash
