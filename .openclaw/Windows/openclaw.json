@@ -629,7 +629,7 @@
       "historyLimit": 20,
       "dmHistoryLimit": 20,
       "chunkMode": "newline",
-      "streaming": "off",
+      "streaming": "partial",
       "mediaMaxMb": 50,
       "actions": {
         "reactions": true,
