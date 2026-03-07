@@ -98,6 +98,9 @@ Canonical binary/script paths:
 - `gog`: `/volume1/homes/clawy/.local/bin/gog`
 - `gemini`: `/volume1/homes/clawy/.local/bin/gemini`
 - `python3` (Entware): `/opt/bin/python3`
+- `openpyxl` (Python module): available via `python3 -c "import openpyxl"`
+- `python-docx` (Python module): available via `python3 -c "import docx"`
+- `python-pptx` (Python module): available via `python3 -c "import pptx"`
 - `chromium` wrapper (headless/browser runtime): `/volume1/@chromium/bin/chromium-wrapper`
 - Whisper skill entry: `/volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh`
 - Image skill entry: `/volume1/openclaw/skills/openai-image-gen/scripts/gen.py`
@@ -114,6 +117,9 @@ command -v deno || true
 command -v bird || true
 command -v gemini || true
 command -v gog || true
+python3 -c "import openpyxl" >/dev/null 2>&1 && echo openpyxl-ok || echo openpyxl-missing
+python3 -c "import docx" >/dev/null 2>&1 && echo python-docx-ok || echo python-docx-missing
+python3 -c "import pptx" >/dev/null 2>&1 && echo python-pptx-ok || echo python-pptx-missing
 [ -x /volume1/@chromium/bin/chromium-wrapper ] && echo chromium-wrapper-ok || echo chromium-wrapper-missing
 [ -x /volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh ] && echo whisper-script-ok || echo whisper-script-missing
 '
@@ -138,6 +144,30 @@ command -v gog || true
   - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; ffmpeg [args]..."`
   - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; ffprobe [args]..."`
 - Runtime availability note: ffmpeg build supports AAC decoder in reference environment.
+
+### openpyxl Environment (Linux reference)
+- Runtime dependency:
+  - `python3 -m pip install --user openpyxl`
+- Prefix example:
+  - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; python3 -c 'import openpyxl'"`
+- Scope:
+  - Excel read/create/write automation for `.xlsx` / `.xlsm` files (legacy `.xls` should be converted first).
+
+### python-docx Environment (Linux reference)
+- Runtime dependency:
+  - `python3 -m pip install --user python-docx`
+- Prefix example:
+  - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; python3 -c 'import docx'"`
+- Scope:
+  - Word document read/create/write automation for `.docx` files.
+
+### python-pptx Environment (Linux reference)
+- Runtime dependency:
+  - `python3 -m pip install --user python-pptx`
+- Prefix example:
+  - `HOME=/volume1/homes/clawy bash -c ". ~/.profile; python3 -c 'import pptx'"`
+- Scope:
+  - PowerPoint read/create/write automation for `.pptx` files.
 
 ### OpenAI Image Generation Environment
 - Skill/environment integration: `openai-image-gen` configured.
@@ -277,6 +307,24 @@ Standard fields used below:
 - **Auth/Env**: `GEMINI_API_KEY`
 - **Execution Context**: host PATH/profile context.
 - **Notes**: Gemini CLI integration available when key is configured.
+
+### openpyxl (Python Excel Toolkit)
+- **Binary/Entry**: `python3` + `openpyxl` module import.
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: host Python context (recommended preflight: `python3 -c "import openpyxl"`).
+- **Notes**: Excel read/create/write workflows for `.xlsx` / `.xlsm` files (legacy `.xls` should be converted first).
+
+### python-docx (Python Word Toolkit)
+- **Binary/Entry**: `python3` + `docx` module import.
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: host Python context (recommended preflight: `python3 -c "import docx"`).
+- **Notes**: Word document read/create/write workflows for `.docx` files.
+
+### python-pptx (Python PowerPoint Toolkit)
+- **Binary/Entry**: `python3` + `pptx` module import.
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: host Python context (recommended preflight: `python3 -c "import pptx"`).
+- **Notes**: PowerPoint read/create/write workflows for `.pptx` files.
 
 ### yt-dlp
 - **Binary/Entry**: `yt-dlp`
