@@ -43,7 +43,7 @@ Highest authority.
 - Session memory sources are restricted to:
   - daily files: `/memory/YYYY-MM-DD.md` or `/memory/YYYY-MM-DD-HHMM.md`
   - weekly summaries: `/memory/weekly/YYYY-Www.md`
-- Any other memory filename pattern is invalid and must never be created (for example event/slugs such as `/memory/2026-02-26-missed-question.md`).
+- Any other memory filename pattern is invalid and must never be created (for example event/slugs such as `/memory/2025-02-26-missed-question.md`).
 - Internal runtime hooks (for example `hooks.internal.entries.session-memory`) may keep ephemeral in-session state, but they do not replace or override the file-backed durable memory policy above.
 - `/MEMORY.md` is policy-only and must not contain conversational/session facts.
 - Session bootstrap (before normal answering):

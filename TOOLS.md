@@ -57,13 +57,13 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 
 ### Memory Guard Verification Matrix
 - Required acceptance tests for path guard behavior:
-  - allow: `/memory/2026-02-26.md`
-  - allow: `/memory/weekly/2026-W09.md`
-  - reject: `/memory/2026-02-26-1448.md`
-  - reject: `/memory/2026-02-26-missed-question.md`
-  - reject: `/memory/weekly/2026-W9.md`
-  - reject: `/memory\2026-02-26.md` when normalization is absent or incorrect
-  - reject: `/memory/../memory/2026-02-26.md`
+  - allow: `/memory/2025-02-26.md`
+  - allow: `/memory/weekly/2025-W09.md`
+  - reject: `/memory/2025-02-26-1448.md`
+  - reject: `/memory/2025-02-26-missed-question.md`
+  - reject: `/memory/weekly/2025-W9.md`
+  - reject: `/memory\2025-02-26.md` when normalization is absent or incorrect
+  - reject: `/memory/../memory/2025-02-26.md`
   - reject: alternative extension variants such as `.MD` or `.markdown`
 
 ### Execution Safety Rules
