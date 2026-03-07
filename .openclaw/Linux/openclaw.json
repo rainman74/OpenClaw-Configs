@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastTouchedVersion": "2026.3.1",
+    "lastTouchedVersion": "2026.3.3",
     "lastTouchedAt": ""
   },
   "env": {
@@ -11,7 +11,7 @@
   },
   "wizard": {
     "lastRunAt": "",
-    "lastRunVersion": "2026.3.1",
+    "lastRunVersion": "2026.3.3",
     "lastRunCommand": "onboard",
     "lastRunMode": "local"
   },
@@ -63,10 +63,6 @@
       },
       "google:default": {
         "provider": "google",
-        "mode": "api_key"
-      },
-      "googlefree:default": {
-        "provider": "googlefree",
         "mode": "api_key"
       },
       "xai:default": {
@@ -157,31 +153,6 @@
             "cost": {
               "input": 0.075,
               "output": 0.3,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "contextWindow": 1048576,
-            "maxTokens": 65536
-          }
-        ]
-      },
-      "googlefree": {
-        "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
-        "apiKey": "${GEMINI_FREE_KEY}",
-        "api": "google-generative-ai",
-        "models": [
-          {
-            "id": "gemini-3-flash",
-            "name": "Gemini 3 Flash Free",
-            "api": "google-generative-ai",
-            "reasoning": false,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
               "cacheRead": 0,
               "cacheWrite": 0
             },
@@ -305,7 +276,6 @@
       "model": {
         "primary": "google/gemini-3-flash",
         "fallbacks": [
-          "googlefree/gemini-3-flash",
           "moonshot/kimi-k2.5"
         ]
       },
@@ -326,9 +296,6 @@
         },
         "google/gemini-3-flash": {
           "alias": "gemini"
-        },
-        "googlefree/gemini-3-flash": {
-          "alias": "geminifree"
         },
         "moonshot/kimi-k2.5": {
           "alias": "kimi"
@@ -434,10 +401,6 @@
           {
             "provider": "google",
             "model": "gemini-3-flash"
-          },
-          {
-            "provider": "googlefree",
-            "model": "gemini-3-flash"
           }
         ]
       },
@@ -454,10 +417,6 @@
           {
             "provider": "google",
             "model": "gemini-3-flash"
-          },
-          {
-            "provider": "googlefree",
-            "model": "gemini-3-flash"
           }
         ]
       },
@@ -473,10 +432,6 @@
         "models": [
           {
             "provider": "google",
-            "model": "gemini-3-flash"
-          },
-          {
-            "provider": "googlefree",
             "model": "gemini-3-flash"
           }
         ]
@@ -629,7 +584,9 @@
       "historyLimit": 20,
       "dmHistoryLimit": 20,
       "chunkMode": "newline",
-      "streaming": "partial",
+      "streaming": "off",
+      "chunkMode": "length",
+      "textChunkLimit": 4000,
       "mediaMaxMb": 50,
       "actions": {
         "reactions": true,
