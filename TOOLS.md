@@ -78,6 +78,10 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
   - Use unquoted delimiters (`<<EOF`) when command/variable substitution is required in the body (for example `$(date)`, `${VAR}`).
   - Use single-quoted delimiters (`<<'EOF'`) only when a fully literal body is required.
   - If placeholders like `$(date)` must be resolved before sending/reporting, never use `<<'EOF'` for that payload block.
+- User-facing mail/report titles must be pre-rendered before transport:
+  - Resolve dynamic values first (example: `TS="$(date '+%Y-%m-%d %H:%M')"`; `SUBJECT="Systemstatus-Prüfung - ${TS}"`).
+  - Never send literal substitution tokens in delivered text (forbidden in output: ``$(...)``, ``${...}``).
+  - Pre-send validation for subject/title is mandatory: reject if it still contains unresolved shell placeholders.
 - Validate required keys before use:
   - `: "${API_KEY:?Missing API_KEY}"`
 - Stable curl baseline:
