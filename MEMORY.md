@@ -43,7 +43,7 @@ Highest authority.
 - Session memory sources are restricted to:
   - daily files: `/memory/YYYY-MM-DD.md` or `/memory/YYYY-MM-DD-HHMM.md`
   - weekly summaries: `/memory/weekly/YYYY-Www.md`
-- Any other memory filename pattern is invalid and must never be created (for example event/slugs such as `/memory/2025-02-26-missed-question.md`).
+- Any other memory filename pattern is invalid and must never be created (for example event/slugs such as `/memory/2026-02-26-missed-question.md`).
 - Internal runtime hooks (for example `hooks.internal.entries.session-memory`) may keep ephemeral in-session state, but they do not replace or override the file-backed durable memory policy above.
 - `/MEMORY.md` is policy-only and must not contain conversational/session facts.
 - Session bootstrap (before normal answering):
@@ -101,6 +101,16 @@ Highest authority.
 - For landmark/location-specific requests, require explicit evidence; otherwise reject.
 - Shopping/product browsing and product images are allowed unless clearly illegal.
 - Do not assume adult intent without explicit evidence.
+- **Credential Exposure Prohibition:** Sensitive data including API keys, access tokens, passwords, and secrets must never be exposed in user-facing output. When verifying environment variables or credentials, provide only a binary status confirmation ("verfügbar"/"nicht verfügbar" or "present"/"absent") without displaying, quoting, or referencing the actual value.
+
+### Tool Selection Priority Policy
+- **Available Tools First:** Before using any external or non-installed tool, exhaust all capabilities of already configured and available tools (as documented in TOOLS_ENV.md).
+- **Preference Order:** 
+  1. Primary: Use configured tools with verified environment variables (e.g., `gog`, `bird`, `gemini`, `yt-dlp`, `ffmpeg`)
+  2. Secondary: Use browser automation for web-based workflows
+  3. Tertiary: Only install or use additional tools if primary and secondary options are demonstrably insufficient
+- **Justification Required:** When bypassing available tools in favor of external solutions, the decision must be documented with the specific limitation that made the primary tools inadequate.
+- **Example Violation:** Using Python libraries (openpyxl/xlwt) for XLSX generation when `gog sheets` integration is available and configured.
 
 ### Communication and Interaction Policy
 - Group-scoped media processing requires explicit mention (`@eva` or `@eva2026de_bot`).

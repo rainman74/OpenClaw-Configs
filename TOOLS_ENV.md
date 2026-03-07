@@ -342,6 +342,30 @@ Standard fields used below:
 - **Execution Context**: normal OpenClaw runtime context.
 - **Notes**: use for discovery/search before deep page fetch.
 
+### Image Provider Priority (Unsplash First)
+When sourcing images for user requests, the following priority order must be observed:
+
+1. **Primary: Unsplash API** (`UNSPLASH_ACCESS_KEY`)
+   - Always attempt Unsplash API first for all image requests
+   - Endpoint: `https://api.unsplash.com/`
+   - Preferred for: stock photos, landscapes, cityscapes, general imagery
+
+2. **Fallback 1: Pexels API** (`PEXELS_API_KEY`)
+   - Use when Unsplash returns insufficient results
+
+3. **Fallback 2: Pixabay API** (`PIXABAY_API_KEY`)
+   - Use when both Unsplash and Pexels return insufficient results
+
+4. **Fallback 3: Wikimedia Commons**
+   - For specific landmarks, historical images, or CC-licensed content
+   - No API key required
+
+5. **Fallback 4: Browser (Headless Chromium)**
+   - Only when all API sources are exhausted or for specific page screenshots
+   - Use `/volume1/@chromium/bin/chromium-wrapper`
+
+**Rationale**: Unsplash provides the best balance of quality, licensing (CC0), and API reliability. Direct API calls are significantly faster than browser-based workflows (~30 seconds vs ~5 minutes).
+
 ### Chromium headless browser runtime
 - **Binary/Entry**: `/volume1/@chromium/bin/chromium-wrapper`
 - **Auth/Env**: no dedicated API key; inherits runtime environment.
