@@ -92,12 +92,16 @@ Canonical binary/script paths:
 - `ffmpeg`: `/var/services/homes/clawy/bin/ffmpeg` (symlinked to `/usr/bin/ffmpeg` in installer)
 - `ffprobe`: `/var/services/homes/clawy/bin/ffprobe`
 - `pandoc`: `/var/services/homes/clawy/bin/pandoc`
+- `ghostscript` (`gs`): `/opt/bin/gs`
 - `deno`: `/volume1/homes/clawy/.local/bin/deno`
 - `bird`: `/volume1/homes/clawy/.local/bin/bird`
 - `gogcli`: `/volume1/homes/clawy/.local/bin/gogcli`
 - `gog`: `/volume1/homes/clawy/.local/bin/gog`
 - `gemini`: `/volume1/homes/clawy/.local/bin/gemini`
+- `git` (Entware): `/opt/bin/git` (symlinked to `/usr/bin/git` in installer)
+- `unzip` (Entware): `/opt/bin/unzip`
 - `python3` (Entware): `/opt/bin/python3`
+- `matplotlib` (Python module): available via `python3 -c "import matplotlib"`
 - `openpyxl` (Python module): available via `python3 -c "import openpyxl"`
 - `python-docx` (Python module): available via `python3 -c "import docx"`
 - `python-pptx` (Python module): available via `python3 -c "import pptx"`
@@ -113,10 +117,15 @@ command -v yt-dlp || true
 command -v ffmpeg || true
 command -v ffprobe || true
 command -v pandoc || true
+command -v gs || true
 command -v deno || true
 command -v bird || true
 command -v gemini || true
 command -v gog || true
+command -v gogcli || true
+command -v git || true
+command -v unzip || true
+python3 -c "import matplotlib" >/dev/null 2>&1 && echo matplotlib-ok || echo matplotlib-missing
 python3 -c "import openpyxl" >/dev/null 2>&1 && echo openpyxl-ok || echo openpyxl-missing
 python3 -c "import docx" >/dev/null 2>&1 && echo python-docx-ok || echo python-docx-missing
 python3 -c "import pptx" >/dev/null 2>&1 && echo python-pptx-ok || echo python-pptx-missing
@@ -302,6 +311,12 @@ Standard fields used below:
 - **Execution Context**: host PATH/profile context.
 - **Notes**: version reference `v0.11.0`; service coverage includes calendar, contacts, docs, drive, gmail, sheets.
 
+### gogcli (Google Workspace CLI binary)
+- **Binary/Entry**: `gogcli`
+- **Auth/Env**: `GOG_ACCOUNT`, `GOG_KEYRING_PASSWORD`
+- **Execution Context**: host PATH/profile context.
+- **Notes**: canonical binary installed in `~/.local/bin`, with `gog` symlink for convenience.
+
 ### gemini (Google Gemini CLI)
 - **Binary/Entry**: `gemini`
 - **Auth/Env**: `GEMINI_API_KEY`
@@ -313,6 +328,12 @@ Standard fields used below:
 - **Auth/Env**: no mandatory key in baseline setup.
 - **Execution Context**: host Python context (recommended preflight: `python3 -c "import openpyxl"`).
 - **Notes**: Excel read/create/write workflows for `.xlsx` / `.xlsm` files (legacy `.xls` should be converted first).
+
+### matplotlib (Python plotting toolkit)
+- **Binary/Entry**: `python3` + `matplotlib` module import.
+- **Auth/Env**: no mandatory key in baseline setup.
+- **Execution Context**: host Python context (recommended preflight: `python3 -c "import matplotlib"`).
+- **Notes**: chart and graph rendering in Python workflows.
 
 ### python-docx (Python Word Toolkit)
 - **Binary/Entry**: `python3` + `docx` module import.
