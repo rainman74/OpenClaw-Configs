@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastTouchedVersion": "2026.3.3",
+    "lastTouchedVersion": "2026.3.2",
     "lastTouchedAt": ""
   },
   "env": {
@@ -11,7 +11,7 @@
   },
   "wizard": {
     "lastRunAt": "",
-    "lastRunVersion": "2026.3.3",
+    "lastRunVersion": "2026.3.2",
     "lastRunCommand": "onboard",
     "lastRunMode": "local"
   },
@@ -380,10 +380,10 @@
       },
       "fetch": {
         "enabled": true,
-        "maxChars": 50000,
+        "maxChars": 40000,
         "maxCharsCap": 50000,
         "timeoutSeconds": 30,
-        "cacheTtlMinutes": 15,
+        "cacheTtlMinutes": 60,
         "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
       }
     },
@@ -437,6 +437,16 @@
         ]
       }
     },
+    "sessions": {
+      "visibility": "all"
+    },
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "Eva",
+        "Clawy"
+      ]
+    },
     "elevated": {
       "enabled": true,
       "allowFrom": {
@@ -451,16 +461,6 @@
     "exec": {
       "security": "full",
       "ask": "off"
-    },
-    "agentToAgent": {
-      "enabled": true,
-      "allow": [
-        "Eva",
-        "Clawy"
-      ]
-    },
-    "sessions": {
-      "visibility": "all"
     }
   },
   "messages": {
@@ -561,6 +561,9 @@
       "dmPolicy": "allowlist",
       "botToken": "${TELEGRAM_BOT_TOKEN}",
       "replyToMode": "off",
+      "streaming": "off",
+      "chunkMode": "newline",
+      "textChunkLimit": 4000,
       "groups": {
         "-1000000000000": {
           "requireMention": true,
@@ -577,16 +580,16 @@
           ]
         }
       },
+      "network": {
+        "autoSelectFamily": false,
+        "dnsResultOrder": "ipv4first"
+      },
       "allowFrom": [
         "000000000"
       ],
       "groupPolicy": "allowlist",
       "historyLimit": 20,
       "dmHistoryLimit": 20,
-      "chunkMode": "newline",
-      "streaming": "off",
-      "chunkMode": "length",
-      "textChunkLimit": 4000,
       "mediaMaxMb": 50,
       "actions": {
         "reactions": true,
