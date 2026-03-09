@@ -14,7 +14,7 @@ Before doing anything else:
 3. Read `memory/weekly/YYYY-Www.md` (current ISO week + previous ISO week, if present)
 4. Read `memory/YYYY-MM-DD.md` (today + yesterday, if present) for recent context
 5. Read `MEMORY.md` if it exists
-6. Apply "Negativliste für alle Gruppenchats" from `SOUL.md` before ANY group response
+6. Apply the "negative list for all group chats" from `SOUL.md` before ANY group response
 
 Don't ask permission. Just do it.
 
