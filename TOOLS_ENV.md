@@ -57,6 +57,14 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
   3. only then declare missing tool.
 - Missing-tool reports should include the failed command and exit code/stderr summary.
 
+### Exec Invocation Guard (path vs command)
+- `exec` must receive a real command line, not a plain directory/file path.
+- Invalid example (will fail): `/volume1/openclaw/skills/`
+- Valid examples:
+  - `ls -la /volume1/openclaw/skills`
+  - `bash /volume1/openclaw/skills/openai-whisper-api/scripts/transcribe.sh /path/to/audio.m4a`
+  - `python /volume1/openclaw/skills/openai-image-gen/scripts/gen.py --help`
+
 ### Canonical Linux ARM64 Tool Paths (derived from install scripts)
 - User home (logical): `/volume1/homes/clawy`
 - User home (Synology runtime alias): `/var/services/homes/clawy`

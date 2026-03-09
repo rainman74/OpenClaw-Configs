@@ -25,6 +25,8 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 
 ### Tool Availability Claim Gate (mandatory before saying "tool missing")
 - Before stating a tool is unavailable, run a deterministic preflight check in the active runtime context.
+- `exec` inputs must always be executable shell commands, never a raw filesystem path by itself.
+- If you need to run a script via absolute path, invoke it with an explicit interpreter or command wrapper (for example `bash /abs/path/script.sh` or `python /abs/path/script.py`).
 - A missing tool claim is valid only after the full discovery sequence is exhausted and all relevant canonical checks failed with explicit evidence (`command not found`, non-zero status, or missing file path).
 - Any successful canonical check (absolute path executable, PATH resolution, or script entrypoint check) means the tool is available and must suppress a missing-tool claim.
 - If `TOOLS_ENV.md` provides an absolute binary path, test that path first; test PATH lookup second.
