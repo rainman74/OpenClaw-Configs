@@ -443,8 +443,8 @@
     "agentToAgent": {
       "enabled": true,
       "allow": [
-        "Eva",
-        "Clawy"
+        "000000000",
+        "000000000"
       ]
     },
     "elevated": {
