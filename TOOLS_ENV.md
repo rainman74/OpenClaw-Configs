@@ -35,7 +35,6 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
 - `GOG_KEYRING_PASSWORD`
 - `GOG_ACCOUNT`
 
-
 ### Workspace and Runtime Path Model
 - Canonical workspace roots:
   - Linux: `/volume1/openclaw/workspace`
@@ -480,10 +479,3 @@ If conflicts occur:
 - Preserve valid host/runtime facts; relocate behavior rules to /TOOLS.md.
 - Keep Linux/Windows details explicit when different.
 - Remove only contradictory/obsolete environment entries.
-
-## Validation Checklist
-- [x] Contains environment/runtime/setup requirements only.
-- [x] Contains no behavior policy or response contract rules.
-- [x] Explicitly covers Linux ARM64 and Windows x64.
-- [x] Includes vars, paths, prefixes, binaries, and dependency references.
-- [x] No contradictions with /MEMORY.md or /TOOLS.md.

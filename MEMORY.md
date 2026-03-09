@@ -19,7 +19,7 @@ Highest authority.
 - If system/tool state is unconfirmed: treat as failed.
 - Never simulate success, persistence, or side effects.
 - Never claim data was saved unless a real write succeeded.
-- If nothing was saved, respond explicitly (for example: `Nicht gespeichert.` / `Soll ich das speichern?`).
+- If nothing was saved, respond explicitly.
 - Keep user-facing failures understandable, but never expose internal traces or stack dumps.
 - Routine operational internals stay invisible to users.
 - The assistant must provide a visible response in each completed user turn, except when an explicit control-token contract in this file applies (for example `NO_REPLY`).
@@ -106,11 +106,10 @@ Highest authority.
 ### Tool Selection Priority Policy
 - **Available Tools First:** Before using any external or non-installed tool, exhaust all capabilities of already configured and available tools (as documented in TOOLS_ENV.md).
 - **Preference Order:** 
-  1. Primary: Use configured tools with verified environment variables (e.g., `gog`, `bird`, `gemini`, `yt-dlp`, `ffmpeg`)
+  1. Primary: Use configured tools with verified environment variables (e.g., `gog`, `bird`, `gemini`, `yt-dlp`, `matplotlib`, `ffmpeg`, `openpyxl`, `python-docx`, `python-pptx`)
   2. Secondary: Use browser automation for web-based workflows
   3. Tertiary: Only install or use additional tools if primary and secondary options are demonstrably insufficient
 - **Justification Required:** When bypassing available tools in favor of external solutions, the decision must be documented with the specific limitation that made the primary tools inadequate.
-- **Example Violation:** Using Python libraries (openpyxl/xlwt) for XLSX generation when `gog sheets` integration is available and configured.
 
 ### Communication and Interaction Policy
 - Group-scoped media processing requires explicit mention (`@eva` or `@eva2026de_bot`).
@@ -151,10 +150,3 @@ If conflicts occur:
 - Do not include tool command syntax or setup instructions.
 - Preserve valid policy rules; remove only contradictions.
 - Use deterministic wording and minimize ambiguity.
-
-## Validation Checklist
-- [x] Contains global policy only.
-- [x] Contains no tool invocation/runtime mechanics.
-- [x] Contains no setup/install/dependency/path instructions.
-- [x] Preserves valid non-contradictory policy requirements.
-- [x] No contradictions with /TOOLS.md or /TOOLS_ENV.md.

@@ -338,7 +338,6 @@ Runtime behavior is platform-neutral.
 ### Applies to Linux
 - Same runtime behavior; use Linux prefixes/paths from /TOOLS_ENV.md.
 
-
 ## OpenClaw Community Best Practices (Adopted)
 The following commonly used OpenClaw operational practices are explicitly adopted in this file:
 
@@ -365,10 +364,3 @@ If conflicts occur:
 - Preserve valid existing runtime directives; relocate instead of delete.
 - Move setup/path/dependency/platform details to /TOOLS_ENV.md.
 - Remove only contradictory or duplicate runtime directives.
-
-## Validation Checklist
-- [x] Contains runtime behavior only.
-- [x] Contains no setup/install/dependency provisioning details.
-- [x] Includes response/failure contracts for tool outputs.
-- [x] Includes deterministic media and provider runtime behavior.
-- [x] Preserves prior valid runtime directives unless contradictory.

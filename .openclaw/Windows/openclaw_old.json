@@ -17,7 +17,7 @@
   },
   "logging": {
     "level": "error",
-    "file": "/volume1/openclaw/openclaw.log",
+    "file": "D:/Apps/OpenClaw/openclaw.log",
     "consoleLevel": "error",
     "consoleStyle": "pretty",
     "redactSensitive": "tools",
@@ -29,11 +29,11 @@
     "enabled": true,
     "remoteCdpTimeoutMs": 2000,
     "remoteCdpHandshakeTimeoutMs": 4000,
-    "executablePath": "/volume1/@chromium/bin/chromium-wrapper",
+    "executablePath": "",
     "headless": true,
     "noSandbox": true,
-    "attachOnly": false,
-    "defaultProfile": "openclaw",
+    "attachOnly": true,
+    "defaultProfile": "remote",
     "profiles": {
       "openclaw": {
         "cdpPort": 18800,
@@ -313,7 +313,7 @@
           "alias": "deepseek-r1"
         }
       },
-      "workspace": "/volume1/openclaw/workspace",
+      "workspace": "D:/Apps/OpenClaw/workspace",
       "bootstrapMaxChars": 80000,
       "userTimezone": "Europe/Berlin",
       "contextPruning": {
@@ -358,51 +358,16 @@
     },
     "list": [
       {
-        "id": "owner",
+        "id": "main",
         "model": "google/gemini-3-flash",
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
-          "emoji": "✨"
-        }
-      },
-      {
-        "id": "group",
-        "model": "google/gemini-3-flash",
-        "identity": {
-          "name": "Bot",
-          "theme": "neutral digital assistant",
-          "emoji": "✨"
-        },
-        "tools": {
-          "deny": ["exec"]
+          "emoji": "🤖"
         }
       }
     ]
   },
-  "bindings": [
-    {
-      "match": {
-        "channel": "telegram",
-        "peer": { "kind": "direct", "id": "864887997" }
-      },
-      "agentId": "owner"
-    },
-    {
-      "match": {
-        "channel": "telegram",
-        "peer": { "kind": "group", "id": "-1003883326455" }
-      },
-      "agentId": "group"
-    },
-    {
-      "match": {
-        "channel": "telegram",
-        "peer": { "kind": "group", "id": "-1001398841380" }
-      },
-      "agentId": "group"
-    }
-  ],
   "tools": {
     "profile": "full",
     "web": {
@@ -478,8 +443,8 @@
     "agentToAgent": {
       "enabled": true,
       "allow": [
-        "owner",
-        "group"
+        "000000000",
+        "000000000"
       ]
     },
     "elevated": {
@@ -494,7 +459,7 @@
       }
     },
     "exec": {
-      "security": "full",
+      "security": "elevated",
       "ask": "off"
     }
   },
@@ -538,10 +503,7 @@
     "config": true,
     "debug": true,
     "restart": true,
-    "ownerDisplay": "raw",
-    "allowFrom": {
-      "telegram": ["864887997"]
-    }
+    "ownerDisplay": "raw"
   },
   "session": {
     "scope": "per-sender",
@@ -600,7 +562,7 @@
       "botToken": "${TELEGRAM_BOT_TOKEN}",
       "replyToMode": "off",
       "streaming": "off",
-      "chunkMode": "length",
+      "chunkMode": "newline",
       "textChunkLimit": 4000,
       "groups": {
         "-1000000000000": {
@@ -654,7 +616,7 @@
       "allowedOrigins": [
         "http://127.0.0.1:18789",
         "http://localhost:18789",
-        "http://192.168.178.5:18789"
+        "http://192.168.178.20:18789"
       ],
       "dangerouslyAllowHostHeaderOriginFallback": true,
       "allowInsecureAuth": true,
@@ -673,8 +635,8 @@
     },
     "tls": {
       "enabled": false,
-      "certPath": "/volume1/openclaw/cert.pem",
-      "keyPath": "/volume1/openclaw/key.pem"
+      "certPath": "D:/Apps/OpenClaw/cert.pem",
+      "keyPath": "D:/Apps/OpenClaw/key.pem"
     },
     "nodes": {
       "allowCommands": [],

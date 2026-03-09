@@ -358,16 +358,51 @@
     },
     "list": [
       {
-        "id": "main",
+        "id": "owner",
         "model": "google/gemini-3-flash",
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
-          "emoji": "🤖"
+          "emoji": "✨"
+        }
+      },
+      {
+        "id": "group",
+        "model": "google/gemini-3-flash",
+        "identity": {
+          "name": "Bot",
+          "theme": "neutral digital assistant",
+          "emoji": "✨"
+        },
+        "tools": {
+          "deny": ["exec"]
         }
       }
     ]
   },
+  "bindings": [
+    {
+      "match": {
+        "channel": "telegram",
+        "peer": { "kind": "direct", "id": "864887997" }
+      },
+      "agentId": "owner"
+    },
+    {
+      "match": {
+        "channel": "telegram",
+        "peer": { "kind": "group", "id": "-1003883326455" }
+      },
+      "agentId": "group"
+    },
+    {
+      "match": {
+        "channel": "telegram",
+        "peer": { "kind": "group", "id": "-1001398841380" }
+      },
+      "agentId": "group"
+    }
+  ],
   "tools": {
     "profile": "full",
     "web": {
@@ -443,8 +478,8 @@
     "agentToAgent": {
       "enabled": true,
       "allow": [
-        "000000000",
-        "000000000"
+        "owner",
+        "group"
       ]
     },
     "elevated": {
@@ -459,7 +494,7 @@
       }
     },
     "exec": {
-      "security": "elevated",
+      "security": "full",
       "ask": "off"
     }
   },
@@ -503,7 +538,10 @@
     "config": true,
     "debug": true,
     "restart": true,
-    "ownerDisplay": "raw"
+    "ownerDisplay": "raw",
+    "allowFrom": {
+      "telegram": ["864887997"]
+    }
   },
   "session": {
     "scope": "per-sender",
@@ -562,7 +600,7 @@
       "botToken": "${TELEGRAM_BOT_TOKEN}",
       "replyToMode": "off",
       "streaming": "off",
-      "chunkMode": "newline",
+      "chunkMode": "length",
       "textChunkLimit": 4000,
       "groups": {
         "-1000000000000": {
