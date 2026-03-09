@@ -459,7 +459,7 @@
       }
     },
     "exec": {
-      "security": "full",
+      "security": "elevated",
       "ask": "off"
     }
   },
