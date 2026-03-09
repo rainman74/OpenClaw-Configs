@@ -45,24 +45,6 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
 - Message media path format: `<workspace>/send/<file>` (workspace-relative)
 - Filesystem-global `/tmp` or `/send` locations outside `<workspace>` are invalid for media workflows.
 
-### OpenClaw CLI Environment (Linux reference)
-- OpenClaw CLI invocation prefix:
-  ```bash
-  PATH="/volume1/homes/clawy/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/syno/bin"
-  export HOME="$HOME_DIR"
-  nohup node "$HOME_DIR/dist/index.js" [command] <params>
-  ```
-- Runtime note: `export HOME="$HOME_DIR"` is important so runtime config, credentials, and profile-relative paths resolve to the intended OpenClaw home.
-
-### Bird Environment (Linux reference)
-- Binary: `bird` (via PATH)
-- Prefix requirement:
-  - `HOME=/volume1/homes/clawy bash -lc 'bird [args]'`
-- Auth environment:
-  - `AUTH_TOKEN`
-  - `CT0`
-- Runtime note: use `bash -lc` context for this binary.
-
 ### Tool Discovery and Evidence-First Diagnostics (Community Pattern)
 - Community-standard agent setups avoid generic "tool not available" statements without command evidence.
 - Require explicit discovery commands before declaring a missing capability:
@@ -278,7 +260,6 @@ python3 -c "import pptx" >/dev/null 2>&1 && echo python-pptx-ok || echo python-p
   - preferred voice: Kathja (Edge TTS)
   - default speaker: Kitchen HomePod
 
-
 ## Available Tools (Unified Environment Inventory)
 
 Standard fields used below:
@@ -286,17 +267,6 @@ Standard fields used below:
 - **Auth/Env**: required environment variables or credential source.
 - **Execution Context**: required prefix/profile/runtime context.
 - **Notes**: environment-specific capability references.
-
-### OpenClaw CLI
-- **Binary/Entry**: `node "$HOME_DIR/dist/index.js"`
-- **Auth/Env**: `HOME` should be exported to `"$HOME_DIR"` for predictable runtime config resolution.
-- **Execution Context**:
-  ```bash
-  PATH="/volume1/homes/clawy/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/syno/bin"
-  export HOME="$HOME_DIR"
-  nohup node "$HOME_DIR/dist/index.js" [command] <params>
-  ```
-- **Notes**: this is the canonical Linux OpenClaw CLI entrypoint (not `tsx`).
 
 ### bird (Twitter/X CLI)
 - **Binary/Entry**: `bird`
