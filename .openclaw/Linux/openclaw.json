@@ -1,34 +1,33 @@
 {
   "meta": {
-    "lastTouchedVersion": "2026.3.2",
-    "lastTouchedAt": ""
+    "lastTouchedVersion": "2026.3.8",
+    "lastTouchedAt": "2026-03-10T01:35:23.780Z"
   },
   "env": {
     "shellEnv": {
       "enabled": true
     },
-    "vars": {}
+    "vars": {
+      "SHELL": "/bin/sh"
+    }
   },
   "wizard": {
-    "lastRunAt": "",
+    "lastRunAt": "2026-03-02T09:55:29.608Z",
     "lastRunVersion": "2026.3.2",
     "lastRunCommand": "onboard",
     "lastRunMode": "local"
   },
   "logging": {
-    "level": "error",
     "file": "/volume1/openclaw/openclaw.log",
+    "level": "error",
     "consoleLevel": "error",
-    "consoleStyle": "pretty",
-    "redactSensitive": "tools",
-    "redactPatterns": [
-      "\\bTOKEN\\b\\s*[=:]\\s*([\"']?)([^\\s\"']+)\\1"
-    ]
+    "consoleStyle": "compact",
+    "redactSensitive": "tools"
   },
   "browser": {
     "enabled": true,
-    "remoteCdpTimeoutMs": 2000,
-    "remoteCdpHandshakeTimeoutMs": 4000,
+    "remoteCdpTimeoutMs": 10000,
+    "remoteCdpHandshakeTimeoutMs": 15000,
     "executablePath": "/volume1/@chromium/bin/chromium-wrapper",
     "headless": true,
     "noSandbox": true,
@@ -312,18 +311,18 @@
         }
       },
       "workspace": "/volume1/openclaw/workspace",
-      "bootstrapMaxChars": 90000,
+      "bootstrapMaxChars": 40000,
       "userTimezone": "Europe/Berlin",
       "contextPruning": {
         "mode": "cache-ttl",
-        "ttl": "1h"
+        "ttl": "15m"
       },
       "compaction": {
         "mode": "default",
-        "reserveTokensFloor": 10000,
+        "reserveTokensFloor": 5000,
         "memoryFlush": {
           "enabled": true,
-          "softThresholdTokens": 40000,
+          "softThresholdTokens": 25000,
           "prompt": "Update memory/YYYY-MM-DD.md with decisions, confirmed findings, open questions, key constraints, hypotheses, and next steps. Max 400 tokens. Reply NO_REPLY if nothing new.",
           "systemPrompt": "Context getting large. Persist durable research state now."
         }
@@ -346,7 +345,7 @@
       },
       "maxConcurrent": 1,
       "subagents": {
-        "maxConcurrent": 2
+        "maxConcurrent": 1
       },
       "sandbox": {
         "browser": {
@@ -356,66 +355,76 @@
     },
     "list": [
       {
-        "id": "owner",
+        "id": "main",
+        "workspace": "/volume1/openclaw/workspace",
         "model": "google/gemini-3-flash",
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
-          "emoji": "✨"
+          "emoji": "🤖"
         }
       },
       {
         "id": "group",
+        "workspace": "/volume1/openclaw/workspace",
         "model": "google/gemini-3-flash",
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
-          "emoji": "✨"
+          "emoji": "🤖"
         },
         "tools": {
-          "deny": ["exec"]
+          "deny": [
+            "exec"
+          ]
         }
       }
     ]
   },
-  "bindings": [
-    {
-      "match": {
-        "channel": "telegram",
-        "peer": { "kind": "direct", "id": "864887997" }
-      },
-      "agentId": "owner"
-    },
-    {
-      "match": {
-        "channel": "telegram",
-        "peer": { "kind": "group", "id": "-1003883326455" }
-      },
-      "agentId": "group"
-    },
-    {
-      "match": {
-        "channel": "telegram",
-        "peer": { "kind": "group", "id": "-1001398841380" }
-      },
-      "agentId": "group"
-    }
-  ],
   "tools": {
     "profile": "full",
+    "allow": [
+      "*"
+    ],
+    "sessions": {
+      "visibility": "all"
+    },
+    "exec": {
+      "host": "gateway",
+      "security": "full",
+      "ask": "off"
+    },
+    "elevated": {
+      "enabled": true,
+      "allowFrom": {
+        "telegram": [
+          "000000000"
+        ],
+        "webchat": [
+          "*"
+        ]
+      }
+    },
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "main",
+        "group"
+      ]
+    },
     "web": {
       "search": {
         "enabled": true,
         "apiKey": "${BRAVE_SEARCH_API_KEY}",
         "maxResults": 5,
-        "timeoutSeconds": 30,
+        "timeoutSeconds": 60,
         "cacheTtlMinutes": 15
       },
       "fetch": {
         "enabled": true,
         "maxChars": 40000,
         "maxCharsCap": 50000,
-        "timeoutSeconds": 30,
+        "timeoutSeconds": 60,
         "cacheTtlMinutes": 60,
         "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
       }
@@ -469,33 +478,40 @@
           }
         ]
       }
-    },
-    "sessions": {
-      "visibility": "all"
-    },
-    "agentToAgent": {
-      "enabled": true,
-      "allow": [
-        "owner",
-        "group"
-      ]
-    },
-    "elevated": {
-      "enabled": true,
-      "allowFrom": {
-        "telegram": [
-          "000000000"
-        ],
-        "webchat": [
-          "*"
-        ]
-      }
-    },
-    "exec": {
-      "security": "full",
-      "ask": "off"
     }
   },
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "direct",
+          "id": "864887997"
+        }
+      }
+    },
+    {
+      "agentId": "group",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-0000000000000"
+        }
+      }
+    },
+    {
+      "agentId": "group",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-1001398841380"
+        }
+      }
+    }
+  ],
   "messages": {
     "groupChat": {
       "mentionPatterns": [
@@ -503,17 +519,17 @@
         "bot",
         "@bot"
       ],
-      "historyLimit": 50
+      "historyLimit": 10
     },
     "queue": {
-      "mode": "collect",
+      "mode": "steer",
       "byChannel": {
-        "whatsapp": "collect",
-        "telegram": "collect"
+        "whatsapp": "steer",
+        "telegram": "steer"
       },
-      "debounceMs": 3000,
-      "cap": 20,
-      "drop": "summarize"
+      "debounceMs": 800,
+      "cap": 5,
+      "drop": "old"
     },
     "ackReactionScope": "all",
     "suppressToolErrors": true,
@@ -521,11 +537,11 @@
       "auto": "tagged",
       "provider": "edge",
       "edge": {
-        "voice": "de-DE-KatjaNeural",
+        "voice": "de-DE-SeraphinaNeural",
         "lang": "de-DE",
         "outputFormat": "audio-24khz-48kbitrate-mono-mp3"
       },
-      "maxTextLength": 4000
+      "maxTextLength": 2000
     }
   },
   "commands": {
@@ -538,7 +554,9 @@
     "restart": true,
     "ownerDisplay": "raw",
     "allowFrom": {
-      "telegram": ["864887997"]
+      "telegram": [
+        "000000000"
+      ]
     }
   },
   "session": {
@@ -578,6 +596,7 @@
   },
   "channels": {
     "whatsapp": {
+      "enabled": false,
       "dmPolicy": "allowlist",
       "selfChatMode": true,
       "allowFrom": [
@@ -596,13 +615,9 @@
       "enabled": true,
       "dmPolicy": "allowlist",
       "botToken": "${TELEGRAM_BOT_TOKEN}",
-      "timeoutSeconds": 60,
       "replyToMode": "off",
-      "streaming": "off",
-      "chunkMode": "newline",
-      "textChunkLimit": 4000,
       "groups": {
-        "-1000000000000": {
+        "-1000000000001": {
           "requireMention": true,
           "enabled": true,
           "allowFrom": [
@@ -617,17 +632,21 @@
           ]
         }
       },
-      "network": {
-        "autoSelectFamily": false,
-        "dnsResultOrder": "ipv4first"
-      },
       "allowFrom": [
         "000000000"
       ],
       "groupPolicy": "allowlist",
-      "historyLimit": 20,
-      "dmHistoryLimit": 20,
+      "historyLimit": 10,
+      "dmHistoryLimit": 15,
+      "textChunkLimit": 2000,
+      "chunkMode": "length",
+      "streaming": "partial",
       "mediaMaxMb": 50,
+      "timeoutSeconds": 30,
+      "network": {
+        "autoSelectFamily": false,
+        "dnsResultOrder": "ipv4first"
+      },
       "actions": {
         "reactions": true,
         "sendMessage": true,
