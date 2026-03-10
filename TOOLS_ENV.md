@@ -31,7 +31,7 @@ Third authority (subordinate to /MEMORY.md and /TOOLS.md).
 - `PEXELS_API_KEY`
 - `FAL_AI_KEY`
 - `GEMINI_API_KEY`
-- `BRAVE_API_KEY`
+- `BRAVE_SEARCH_API_KEY`
 - `GOG_KEYRING_PASSWORD`
 - `GOG_ACCOUNT`
 
@@ -124,7 +124,7 @@ python3 -c "import pptx" >/dev/null 2>&1 && echo python-pptx-ok || echo python-p
 ```
 
 ### Web Access Environment
-- Brave Search API integration is available when `BRAVE_API_KEY` is configured.
+- Brave Search API integration is available when `BRAVE_SEARCH_API_KEY` is configured.
 - Headless Chromium runtime is available via wrapper:
   - `/volume1/@chromium/bin/chromium-wrapper`
 - Typical remote-debugging endpoint reference: `http://127.0.0.1:18800/json/list`.
@@ -384,7 +384,7 @@ Standard fields used below:
 
 ### Brave Search API integration
 - **Binary/Entry**: OpenClaw Brave web-search integration (API-backed tool call).
-- **Auth/Env**: `BRAVE_API_KEY`
+- **Auth/Env**: `BRAVE_SEARCH_API_KEY`
 - **Execution Context**: normal OpenClaw runtime context.
 - **Notes**: use for discovery/search before deep page fetch.
 
