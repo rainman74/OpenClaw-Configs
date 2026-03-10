@@ -205,9 +205,13 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
 - Wikimedia behavior:
   - never use as default provider when Unsplash/Pexels/Pixabay/hotlink already produced valid candidates,
   - use for explicit Commons-specific requests (e.g. historical/archival/CC-only) before browser fallback, or when earlier non-browser providers failed,
-  - resolve canonical file URL via Wikimedia API metadata (`imageinfo`) or verified File page parsing,
-  - never guess MD5 path,
+  - Commons API extract (deterministic direct-image URLs):
+    - `action=query` + `prop=imageinfo` + `iiprop=url` (optional `iiprop=url|size|mime`),
+    - single-image example: `https://commons.wikimedia.org/w/api.php?action=query&titles=File:Albert_Einstein_Head.jpg&prop=imageinfo&iiprop=url&format=json`,
+    - category generator example: `https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtitle=Category:Images_from_Wiki_Loves_Earth_2023_in_Germany&gcmtype=file&prop=imageinfo&iiprop=url|size|mime&format=json`.
+  - canonical file URL must come from Commons API `imageinfo` response (no guessed MD5 paths),
   - reject URLs containing backend storage paths like `/v1/AUTH_` (non-public object path),
+  - if a direct Commons URL returns 404 or HTML "File not found", re-resolve once via API using the requested filename (and `File:` prefix normalization) before failing the provider,
   - require final fetch checks: status 200, `content-type image/*`, non-empty binary body, and no HTML response,
   - if Wikimedia validation fails, continue fallback order instead of returning that URL.
 - Direct hotlink runtime policy:

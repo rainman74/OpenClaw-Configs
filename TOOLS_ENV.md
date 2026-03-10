@@ -406,9 +406,9 @@ When sourcing images for user requests, the following priority order must be obs
    - Use only for allowlisted domains with strict HTTP/content validation
 
 5. **Fallback 4: Wikimedia Commons (strict fallback only)**
-   - Use for explicit Commons/historical/CC-specific requests before browser fallback, or when earlier non-browser providers failed
-   - Resolve canonical URL via Commons metadata (no guessed hash paths)
-   - Reject backend object-store paths such as `/v1/AUTH_...` and any HTML "File not found" responses
+   - Commons API endpoint capability: `https://commons.wikimedia.org/w/api.php`
+   - Supported direct-image query parameters: `action=query`, `prop=imageinfo`, `iiprop=url|size|mime`
+   - Supported category generator parameters: `generator=categorymembers`, `gcmtitle=Category:<Name>`, `gcmtype=file`
 
 6. **Fallback 5: Browser (Headless Chromium, last fallback)**
    - Use only when all API/direct sources are exhausted or when page rendering/screenshot is explicitly required
