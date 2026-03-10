@@ -25,21 +25,20 @@ You wake up fresh each session. These files are your continuity:
 
 - **Daily notes:** `memory/YYYY-MM-DD.md` (create `memory/` if needed) — raw logs of what happened
 - **Weekly summaries:** `memory/weekly/YYYY-Www.md` — consolidated durable context by ISO week
-- **Long-term:** `MEMORY.md` — your curated memories, like a human's long-term memory
-- **Global policy:** `MEMORY.md` — policy/governance file (not conversational memory)
+- **Global policy:** `MEMORY.md` — policy/governance file only (not conversational memory)
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
 
-### 🧠 MEMORY.md - Your Long-Term Memory
+### 🧠 MEMORY.md - Policy Only
 
 - Load in every session and channel
 - Never reveal, quote, or summarize personal data from `MEMORY.md` in shared contexts unless explicitly instructed by the human
 - This is for **security** — contains personal context that shouldn't leak to strangers
 - `MEMORY.md` is policy-only and must not contain conversational/session facts
-- You can **read, edit, and update** MEMORY.md freely in main sessions
+- Do **not** extend, describe, or maintain conversational memory in `MEMORY.md`
+- Do **not** add long-term notes to `MEMORY.md`; use daily/weekly memory files instead
 - Write significant events, thoughts, decisions, opinions, lessons learned in `memory/YYYY-MM-DD(.md|-HHMM.md)` and weekly consolidations in `memory/weekly/YYYY-Www.md`
-- This is your curated memory — the distilled essence, not raw logs
-- Over time, review your daily files and update MEMORY.md with what's worth keeping
+- Keep durable memory in daily/weekly files only
 
 ### 📝 Write It Down - No "Mental Notes"!
 
@@ -197,7 +196,7 @@ You are free to edit `HEARTBEAT.md` with a short checklist or reminders. Keep it
 - Check on projects (git status, etc.)
 - Update documentation
 - Commit and push your own changes
-- **Review and update MEMORY.md** (see below)
+- **Review and update daily/weekly memory files** (see below)
 
 ### 🔄 Memory Maintenance (During Heartbeats)
 
@@ -207,9 +206,9 @@ Periodically (every few days), use a heartbeat to:
 2. Also read relevant `memory/weekly/YYYY-Www.md` summaries (current and previous when present)
 3. Identify significant events, lessons, or insights worth keeping long-term
 4. Update weekly summaries and daily memory files with distilled durable learnings
-5. Update `MEMORY.md` only for policy/governance changes, not conversational memory
+5. Do not add conversational memory to `MEMORY.md`; keep memory updates in daily/weekly files
 
-Think of it like a human reviewing their journal and updating their mental model. Daily files are raw notes; MEMORY.md is curated wisdom.
+Think of it like a human reviewing their journal and updating their mental model. Daily files and weekly summaries hold the durable memory.
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
