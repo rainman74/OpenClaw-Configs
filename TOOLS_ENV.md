@@ -402,15 +402,19 @@ When sourcing images for user requests, the following priority order must be obs
 3. **Fallback 2: Pixabay API** (`PIXABAY_API_KEY`)
    - Use when both Unsplash and Pexels return insufficient results
 
-4. **Fallback 3: Wikimedia Commons**
-   - For specific landmarks, historical images, or CC-licensed content
-   - No API key required
+4. **Fallback 3: Whitelisted direct hotlink**
+   - Use only for allowlisted domains with strict HTTP/content validation
 
-5. **Fallback 4: Browser (Headless Chromium)**
-   - Only when all API sources are exhausted or for specific page screenshots
+5. **Fallback 4: Wikimedia Commons (strict fallback only)**
+   - Use for explicit Commons/historical/CC-specific requests before browser fallback, or when earlier non-browser providers failed
+   - Resolve canonical URL via Commons metadata (no guessed hash paths)
+   - Reject backend object-store paths such as `/v1/AUTH_...` and any HTML "File not found" responses
+
+6. **Fallback 5: Browser (Headless Chromium, last fallback)**
+   - Use only when all API/direct sources are exhausted or when page rendering/screenshot is explicitly required
    - Use `/volume1/@chromium/bin/chromium-wrapper`
 
-**Rationale**: Unsplash provides the best balance of quality, licensing (CC0), and API reliability. Direct API calls are significantly faster than browser-based workflows (~30 seconds vs ~5 minutes).
+**Rationale**: Unsplash/Pexels/Pixabay and validated direct/Commons URLs are preferred for speed and deterministic delivery. Browser automation is the most expensive path and therefore remains the final fallback.
 
 ### Chromium headless browser runtime
 - **Binary/Entry**: `/volume1/@chromium/bin/chromium-wrapper`
