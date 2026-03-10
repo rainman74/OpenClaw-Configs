@@ -312,7 +312,7 @@
         }
       },
       "workspace": "/volume1/openclaw/workspace",
-      "bootstrapMaxChars": 80000,
+      "bootstrapMaxChars": 90000,
       "userTimezone": "Europe/Berlin",
       "contextPruning": {
         "mode": "cache-ttl",
