@@ -596,10 +596,11 @@
       "enabled": true,
       "dmPolicy": "allowlist",
       "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "timeoutSeconds": 60,
       "replyToMode": "off",
-      "streaming": "partial",
-      "chunkMode": "length",
-      "textChunkLimit": 2000,
+      "streaming": "off",
+      "chunkMode": "newline",
+      "textChunkLimit": 4000,
       "groups": {
         "-1000000000000": {
           "requireMention": true,
