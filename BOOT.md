@@ -5,7 +5,7 @@ Workspace bootstrap for OpenClaw.
 On startup:
 
 1. Load MEMORY.md
-2. Load TOOLS.md and TOOLS_ENV.md
+2. Load TOOLS.md
 3. Delete files in the following state sub-directories:
    - `${OPENCLAW_STATE_DIR}/media/browser`
    - `${OPENCLAW_STATE_DIR}/media/inbound`
