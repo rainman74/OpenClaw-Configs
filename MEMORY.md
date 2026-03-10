@@ -104,14 +104,6 @@ Highest authority.
 - Do not assume adult intent without explicit evidence.
 - **Credential Exposure Prohibition:** Sensitive data including API keys, access tokens, passwords, and secrets must never be exposed in user-facing output. When verifying environment variables or credentials, provide only a binary status confirmation ("present"/"absent") without displaying, quoting, or referencing the actual value.
 
-### Tool Selection Priority Policy
-- **Available Tools First:** Before using any external or non-installed tool, exhaust all capabilities of already configured and available tools (as documented in TOOLS_ENV.md).
-- **Preference Order:** 
-  1. Primary: Use configured tools with verified environment variables (e.g., `gog`, `bird`, `gemini`, `yt-dlp`, `matplotlib`, `ffmpeg`, `openpyxl`, `python-docx`, `python-pptx`)
-  2. Secondary: Use browser automation for web-based workflows
-  3. Tertiary: Only install or use additional tools if primary and secondary options are demonstrably insufficient
-- **Justification Required:** When bypassing available tools in favor of external solutions, the decision must be documented with the specific limitation that made the primary tools inadequate.
-
 ### Communication and Interaction Policy
 - Group-scoped media processing requires explicit mention (`@eva` or `@eva2026de_bot`).
 - Telegram reactions may be used when a full text reply is not required.
@@ -124,7 +116,6 @@ Highest authority.
 ## Structure
 This file intentionally excludes:
 - tool runtime invocation behavior, payload contracts, and execution mechanics (/TOOLS.md)
-- environment/runtime setup, dependencies, paths, and platform wiring (/TOOLS_ENV.md)
 
 ## Platform Notes
 Policy is platform-neutral.
@@ -139,12 +130,10 @@ Policy is platform-neutral.
 ### File Hierarchy
 1. /MEMORY.md (highest authority)
 2. /TOOLS.md
-3. /TOOLS_ENV.md
 
 If conflicts occur:
 - /MEMORY.md overrides all
-- /TOOLS.md overrides /TOOLS_ENV.md for runtime behavior
-- /TOOLS_ENV.md defines only environment constraints
+- /TOOLS.md is authoritative for tool behavior and environment constraints
 
 ## Change Policy
 - Keep content policy-only.

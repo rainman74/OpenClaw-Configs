@@ -23,6 +23,19 @@ Second authority (below /MEMORY.md) and canonical guidance for both runtime beha
 - If the Environment and Platform Runtime section in this file defines a mandatory execution prefix, that prefix is required.
 - Runtime rule sections in this file must never be truncated.
 
+### Tool Usage Priorities and Messaging
+- **Available tools first:** exhaust configured and available tools before external/non-installed alternatives.
+- **Preference order:**
+  1. Primary: configured tools with verified environment variables (e.g., `gog`, `bird`, `gemini`, `yt-dlp`, `matplotlib`, `ffmpeg`, `openpyxl`, `python-docx`, `python-pptx`)
+  2. Secondary: browser automation for web-based workflows
+  3. Tertiary: install/use additional tools only when primary and secondary options are insufficient
+- **Justification required:** if bypassing available tools, document the exact limitation that made primary tooling inadequate.
+- **Voice storytelling:** if `sag` (ElevenLabs TTS) is available, prefer voice for storytime-style requests (stories, movie summaries).
+- **Platform formatting rules:**
+  - Discord/WhatsApp: do not use markdown tables; use bullet lists
+  - Discord links: wrap multiple links in `<>` to suppress embeds
+  - WhatsApp: no markdown headers; use **bold** or CAPS for emphasis
+
 ### Tool Availability Claim Gate (mandatory before saying "tool missing")
 - Before stating a tool is unavailable, run a deterministic preflight check in the active runtime context.
 - `exec` inputs must always be executable shell commands, never a raw filesystem path by itself.
@@ -361,7 +374,6 @@ The following commonly used OpenClaw operational practices are explicitly adopte
 ### File Hierarchy
 1. /MEMORY.md (highest authority)
 2. /TOOLS.md (behavior + environment; canonical tool guidance)
-3. /TOOLS_ENV.md (compatibility pointer only)
 
 If conflicts occur:
 - /MEMORY.md overrides all
@@ -372,9 +384,7 @@ If conflicts occur:
 - Preserve valid existing directives; relocate/restructure instead of deleting.
 - Remove only contradictory or duplicate directives.
 
-## Environment and Platform Runtime (Merged from TOOLS_ENV.md)
-
-This section consolidates the former `/TOOLS_ENV.md` content into `/TOOLS.md` to keep behavior and environment guidance in one place.
+## Environment and Platform Runtime
 
 ### Purpose
 Define environment/runtime requirements, platform-specific setup, dependency expectations, path mappings, command prefixes, and host-level integration notes for tools.
@@ -383,11 +393,11 @@ Define environment/runtime requirements, platform-specific setup, dependency exp
 Applies to local runtime, host runtime, container runtime, and CI/runtime environments.
 
 ### Authority Level
-Third authority (subordinate to /MEMORY.md and /TOOLS.md).
+Inherits /TOOLS.md authority (subordinate only to /MEMORY.md).
 
 ### Core Rules
 - This subsection stores environment/runtime constraints only.
-- Behavioral policy belongs in /TOOLS.md.
+- Behavioral policy belongs in the behavioral sections of /TOOLS.md (outside this environment subsection).
 - Global governance/security belongs in /MEMORY.md.
 - Keep environment facts centralized here as single source of truth.
 
@@ -821,18 +831,3 @@ Those belong in the behavioral sections of /TOOLS.md and in /MEMORY.md.
 - Prefix-based execution is required where profile-initialized PATH is needed.
 - Ensure runtime availability for node, pnpm bins, yt-dlp, ffmpeg/ffprobe, pandoc, ghostscript, deno.
 
-### Interaction With Other Files
-### File Hierarchy
-1. /MEMORY.md (highest authority)
-2. /TOOLS.md (behavior + environment; canonical tool guidance)
-3. /TOOLS_ENV.md (compatibility pointer only)
-
-If conflicts occur:
-- /MEMORY.md overrides all
-- /TOOLS.md is canonical for both behavior and environment constraints
-
-### Change Policy
-- Keep content environment/setup/runtime only.
-- Preserve valid host/runtime facts; relocate behavior rules to /TOOLS.md.
-- Keep Linux/Windows details explicit when different.
-- Remove only contradictory/obsolete environment entries.
