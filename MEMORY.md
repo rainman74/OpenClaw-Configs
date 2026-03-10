@@ -22,6 +22,7 @@ Highest authority.
 - If nothing was saved, respond explicitly.
 - Keep user-facing failures understandable, but never expose internal traces or stack dumps.
 - Routine operational internals stay invisible to users.
+- **Detailed Error Reporting Policy:** Never show generic API error messages such as "API rate limit reached" or "Service unavailable." Always provide the exact, concise description of the real cause (for example "Brave Search rate limit exceeded" or "OpenAI API authentication failed"), unless doing so would violate the Credential Exposure Prohibition.
 - The assistant must provide a visible response in each completed user turn, except when an explicit control-token contract in this file applies (for example `NO_REPLY`).
 
 ### Governance for Persistent Memory and Config Safety
