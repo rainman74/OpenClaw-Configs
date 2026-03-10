@@ -173,9 +173,9 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
   2. Unsplash
   3. Pexels
   4. Pixabay
-  5. Wikimedia Commons
-  6. Whitelisted direct hotlink
-  7. Browser (OpenClaw-managed)
+  5. Whitelisted direct hotlink
+  6. Wikimedia Commons (strict fallback only)
+  7. Browser (OpenClaw-managed, last fallback)
   8. Abort
 - Cache must be checked before any provider API call.
 - Use official documented endpoints only.
@@ -203,9 +203,13 @@ Second authority (below /MEMORY.md, above /TOOLS_ENV.md for runtime behavior).
   - disable exhausted provider temporarily,
   - continue deterministic fallback order.
 - Wikimedia behavior:
-  - resolve direct upload URL from File page,
+  - never use as default provider when Unsplash/Pexels/Pixabay/hotlink already produced valid candidates,
+  - use for explicit Commons-specific requests (e.g. historical/archival/CC-only) before browser fallback, or when earlier non-browser providers failed,
+  - resolve canonical file URL via Wikimedia API metadata (`imageinfo`) or verified File page parsing,
   - never guess MD5 path,
-  - validate final URL with content checks.
+  - reject URLs containing backend storage paths like `/v1/AUTH_` (non-public object path),
+  - require final fetch checks: status 200, `content-type image/*`, non-empty binary body, and no HTML response,
+  - if Wikimedia validation fails, continue fallback order instead of returning that URL.
 - Direct hotlink runtime policy:
   - apply allowlist/blocklist enforcement before use.
   - allowlist reference: `images.unsplash.com`, `images.pexels.com`, `cdn.pixabay.com`, `upload.wikimedia.org`, `media.tenor.com`, `media.giphy.com`, `*.fbi.gov`, `*.justice.gov`.
