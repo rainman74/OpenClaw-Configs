@@ -390,7 +390,7 @@
     "list": [
       {
         "id": "main",
-        "workspace": "/volume1/openclaw/workspace",
+        "workspace": "D:/Apps/OpenClaw/workspace",
         "model": "minimax/minimax-m2.5",
         "identity": {
           "name": "Bot",
