@@ -673,10 +673,10 @@
       "historyLimit": 10,
       "dmHistoryLimit": 15,
       "textChunkLimit": 4000,
-      "chunkMode": "newline",
-      "streaming": "off",
+      "chunkMode": "length",
+      "streaming": "partial",
       "mediaMaxMb": 50,
-      "timeoutSeconds": 20,
+      "timeoutSeconds": 30,
       "network": {
         "autoSelectFamily": false,
         "dnsResultOrder": "ipv4first"
