@@ -285,6 +285,10 @@ Second authority (below /MEMORY.md) and canonical guidance for both runtime beha
   - validate attachment size/type before send,
   - remove temporary body files after successful send,
   - keep media delivery path behavior aligned with message-tool flow (`<workspace>/send/<file>`).
+  - **Whitespace & Formatting Enforcement (gogcli/gmail):**
+    - Never use literal `\n` or escape sequences in the shell command for line breaks; they are emitted as text.
+    - Pass multi-line bodies as quoted literal strings to preserve natural line endings.
+    - Avoid fixed-width line wrapping (hard wraps) to ensure responsive rendering on mobile devices.
 - Telegram media runtime behavior:
   - in groups, process media only when the bot is explicitly mentioned (see `/MEMORY.md` mention policy).
   - when a Telegram `file_id` is present, prefer Bot API flow (`getFile` -> `api.telegram.org/file/...`) before any URL-extractor fallback.
