@@ -50,8 +50,8 @@
   },
   "ui": {
     "assistant": {
-      "name": "Bot",
-      "avatar": "avatars/Bot.jpg"
+      "name": "Eva",
+      "avatar": "avatars/Eva.jpg"
     }
   },
   "auth": {
@@ -372,8 +372,8 @@
         "model": "moonshot/kimi-k2.5",
         "includeReasoning": false,
         "target": "telegram",
-        "to": "000000000",
-        "accountId": "example_bot",
+        "to": "864887997",
+        "accountId": "eva2026de_bot",
         "prompt": "Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.",
         "ackMaxChars": 300
       },
@@ -393,9 +393,9 @@
         "workspace": "/volume1/openclaw/workspace",
         "model": "minimax/minimax-m2.5",
         "identity": {
-          "name": "Bot",
-          "theme": "neutral digital assistant",
-          "emoji": "🤖"
+          "name": "Eva",
+          "theme": "intelligent and knowledgeable young woman",
+          "emoji": "✨"
         }
       },
       {
@@ -403,9 +403,9 @@
         "workspace": "/volume1/openclaw/workspace",
         "model": "minimax/minimax-m2.5",
         "identity": {
-          "name": "Bot",
-          "theme": "neutral digital assistant",
-          "emoji": "🤖"
+          "name": "Eva",
+          "theme": "intelligent and knowledgeable young woman",
+          "emoji": "✨"
         },
         "tools": {
           "deny": [
@@ -501,7 +501,7 @@
       "enabled": true,
       "allowFrom": {
         "telegram": [
-          "000000000"
+          "864887997"
         ],
         "webchat": [
           "*"
@@ -531,7 +531,7 @@
         "channel": "telegram",
         "peer": {
           "kind": "group",
-          "id": "-0000000000000"
+          "id": "-1003883326455"
         }
       }
     },
@@ -549,9 +549,9 @@
   "messages": {
     "groupChat": {
       "mentionPatterns": [
-        "@example_bot",
-        "bot",
-        "@bot"
+        "@eva2026de_bot",
+        "eva",
+        "@eva"
       ],
       "historyLimit": 10
     },
@@ -589,7 +589,7 @@
     "ownerDisplay": "raw",
     "allowFrom": {
       "telegram": [
-        "000000000"
+        "864887997"
       ]
     }
   },
@@ -634,7 +634,7 @@
       "dmPolicy": "allowlist",
       "selfChatMode": true,
       "allowFrom": [
-        "+4900000000000"
+        "+4917655763798"
       ],
       "groupPolicy": "allowlist",
       "ackReaction": {
@@ -651,14 +651,14 @@
       "botToken": "${TELEGRAM_BOT_TOKEN}",
       "replyToMode": "off",
       "groups": {
-        "-1000000000001": {
+        "-1003883326455": {
           "requireMention": true,
           "enabled": true,
           "allowFrom": [
             "*"
           ]
         },
-        "-1000000000001": {
+        "-1001398841380": {
           "requireMention": true,
           "enabled": true,
           "allowFrom": [
@@ -667,7 +667,7 @@
         }
       },
       "allowFrom": [
-        "000000000"
+        "864887997"
       ],
       "groupPolicy": "allowlist",
       "historyLimit": 10,

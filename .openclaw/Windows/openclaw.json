@@ -1,7 +1,7 @@
 {
   "meta": {
     "lastTouchedVersion": "2026.3.8",
-    "lastTouchedAt": "2026-03-10T01:35:23.780Z"
+    "lastTouchedAt": "2026-03-11T10:49:19.879Z"
   },
   "env": {
     "shellEnv": {
@@ -672,11 +672,11 @@
       "groupPolicy": "allowlist",
       "historyLimit": 10,
       "dmHistoryLimit": 15,
-      "textChunkLimit": 2000,
-      "chunkMode": "length",
-      "streaming": "partial",
+      "textChunkLimit": 4000,
+      "chunkMode": "newline",
+      "streaming": "off",
       "mediaMaxMb": 50,
-      "timeoutSeconds": 30,
+      "timeoutSeconds": 20,
       "network": {
         "autoSelectFamily": false,
         "dnsResultOrder": "ipv4first"
