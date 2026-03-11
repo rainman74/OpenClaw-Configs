@@ -1,0 +1,3 @@
+[submodule "private_data"]
+	path = private_data
+	url = https://github.com/rainman74/OpenClaw-Configs-Private
