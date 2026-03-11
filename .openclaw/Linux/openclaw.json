@@ -60,6 +60,10 @@
         "provider": "moonshot",
         "mode": "api_key"
       },
+      "minimax:default": {
+        "provider": "minimax",
+        "mode": "api_key"
+      },
       "google:default": {
         "provider": "google",
         "mode": "api_key"
@@ -106,6 +110,31 @@
               "cacheWrite": 0
             },
             "contextWindow": 262144,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "minimax": {
+        "baseUrl": "https://api.minimax.io/v1",
+        "apiKey": "${MINIMAX_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "minimax-m2.5",
+            "name": "MiniMax M2.5",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0.04,
+              "output": 0.16,
+              "cacheRead": 0.004,
+              "cacheWrite": 0
+            },
+            "contextWindow": 204800,
             "maxTokens": 8192
           }
         ]
@@ -273,8 +302,10 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "google/gemini-3-flash",
-        "fallbacks": []
+        "primary": "minimax/minimax-m2.5",
+        "fallbacks": [
+          "moonshot/kimi-k2.5"
+        ]
       },
       "models": {
         "anthropic/claude-opus-4-5": {
@@ -296,6 +327,9 @@
         },
         "moonshot/kimi-k2.5": {
           "alias": "kimi"
+        },
+        "minimax/minimax-m2.5": {
+          "alias": "minimax"
         },
         "xai/grok-4-1-fast": {
           "alias": "grokfast"
@@ -357,7 +391,7 @@
       {
         "id": "main",
         "workspace": "/volume1/openclaw/workspace",
-        "model": "google/gemini-3-flash",
+        "model": "minimax/minimax-m2.5",
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
@@ -367,7 +401,7 @@
       {
         "id": "group",
         "workspace": "/volume1/openclaw/workspace",
-        "model": "google/gemini-3-flash",
+        "model": "minimax/minimax-m2.5",
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
@@ -386,32 +420,6 @@
     "allow": [
       "*"
     ],
-    "sessions": {
-      "visibility": "all"
-    },
-    "exec": {
-      "host": "gateway",
-      "security": "full",
-      "ask": "off"
-    },
-    "elevated": {
-      "enabled": true,
-      "allowFrom": {
-        "telegram": [
-          "000000000"
-        ],
-        "webchat": [
-          "*"
-        ]
-      }
-    },
-    "agentToAgent": {
-      "enabled": true,
-      "allow": [
-        "main",
-        "group"
-      ]
-    },
     "web": {
       "search": {
         "enabled": true,
@@ -441,8 +449,8 @@
         },
         "models": [
           {
-            "provider": "google",
-            "model": "gemini-3-flash"
+            "provider": "minimax",
+            "model": "minimax/minimax-m2.5"
           }
         ]
       },
@@ -457,8 +465,8 @@
         },
         "models": [
           {
-            "provider": "google",
-            "model": "gemini-3-flash"
+            "provider": "minimax",
+            "model": "minimax/minimax-m2.5"
           }
         ]
       },
@@ -473,11 +481,37 @@
         },
         "models": [
           {
-            "provider": "google",
-            "model": "gemini-3-flash"
+            "provider": "minimax",
+            "model": "minimax/minimax-m2.5"
           }
         ]
       }
+    },
+    "sessions": {
+      "visibility": "all"
+    },
+    "agentToAgent": {
+      "enabled": true,
+      "allow": [
+        "main",
+        "group"
+      ]
+    },
+    "elevated": {
+      "enabled": true,
+      "allowFrom": {
+        "telegram": [
+          "000000000"
+        ],
+        "webchat": [
+          "*"
+        ]
+      }
+    },
+    "exec": {
+      "host": "gateway",
+      "security": "full",
+      "ask": "off"
     }
   },
   "bindings": [
