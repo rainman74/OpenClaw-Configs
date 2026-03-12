@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastTouchedVersion": "2026.3.8",
+    "lastTouchedVersion": "2026.3.11",
     "lastTouchedAt": "2026-03-11T10:49:19.879Z"
   },
   "env": {
@@ -18,11 +18,12 @@
     "lastRunMode": "local"
   },
   "logging": {
-    "file": "/volume1/openclaw/openclaw.log",
-    "level": "error",
-    "consoleLevel": "error",
+    "file": "/dev/null",
+    "level": "fatal",
+    "consoleLevel": "fatal",
     "consoleStyle": "compact",
-    "redactSensitive": "tools"
+    "redactSensitive": "tools",
+    "redactPatterns": ["sk-.*"]
   },
   "browser": {
     "enabled": true,
@@ -377,9 +378,9 @@
         "prompt": "Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.",
         "ackMaxChars": 300
       },
-      "maxConcurrent": 1,
+      "maxConcurrent": 2,
       "subagents": {
-        "maxConcurrent": 1
+        "maxConcurrent": 2
       },
       "sandbox": {
         "browser": {
