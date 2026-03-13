@@ -10,6 +10,7 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 
 Before doing anything else:
 
+0. Read the environment system date/time (`sysdate`) and set it as authoritative "today" for this session (do not assume training cutoff date)
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
 3. Read `memory/weekly/YYYY-Www.md` (current ISO week + previous ISO week, if present)
