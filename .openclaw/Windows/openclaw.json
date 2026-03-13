@@ -380,7 +380,7 @@
       },
       "maxConcurrent": 2,
       "subagents": {
-        "maxConcurrent": 2
+        "maxConcurrent": 4
       },
       "sandbox": {
         "browser": {
