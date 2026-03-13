@@ -18,7 +18,7 @@
     "lastRunMode": "local"
   },
   "logging": {
-    "file": "NUL",
+    "file": "D:/Apps/OpenClaw/openclaw.log",
     "level": "fatal",
     "consoleLevel": "fatal",
     "consoleStyle": "compact",
@@ -29,7 +29,7 @@
     "enabled": true,
     "remoteCdpTimeoutMs": 10000,
     "remoteCdpHandshakeTimeoutMs": 15000,
-    "executablePath": "/volume1/@chromium/bin/chromium-wrapper",
+    "executablePath": "D:/Apps/Brave/Brave/Brave.exe",
     "headless": true,
     "noSandbox": true,
     "attachOnly": true,
