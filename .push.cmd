@@ -9,4 +9,5 @@ git commit -m "Updates" || echo No changes to commit.
 git push
 
 :END
+pause
 exit /b

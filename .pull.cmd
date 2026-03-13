@@ -13,4 +13,5 @@ git commit -m "Bump submodule pointer" || echo Submodule already up to date.
 git push
 
 :END
+pause
 exit /b
