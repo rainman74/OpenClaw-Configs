@@ -823,15 +823,11 @@ Those belong in the behavioral sections of /TOOLS.md and in /MEMORY.md.
 ### Platform Notes
 ### Applies to Windows
 - Architecture target: x64.
-- OpenClaw command alias reference: `oc [command]`.
-- Primary OpenClaw base path: `D:/Apps/OpenClaw`.
 - Ensure equivalent dependency/toolchain installation for used tools.
 - Preserve workspace-relative media staging semantics.
 
 ### Applies to Linux
 - Architecture target: ARM64.
-- Reference deployment uses `/volume1/...` paths.
-- OpenClaw base path: `/volume1/openclaw`.
 - Prefix-based execution is required where profile-initialized PATH is needed.
 - Ensure runtime availability for node, pnpm bins, yt-dlp, ffmpeg/ffprobe, pandoc, ghostscript, deno.
 
