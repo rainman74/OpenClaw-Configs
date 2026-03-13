@@ -378,9 +378,9 @@
         "prompt": "Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.",
         "ackMaxChars": 300
       },
-      "maxConcurrent": 2,
+      "maxConcurrent": 1,
       "subagents": {
-        "maxConcurrent": 2
+        "maxConcurrent": 1
       },
       "sandbox": {
         "browser": {
