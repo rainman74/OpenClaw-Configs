@@ -108,6 +108,9 @@ Highest authority.
 - Group-scoped media processing requires explicit mention (`@eva` or `@eva2026de_bot`).
 - Telegram reactions may be used when a full text reply is not required.
 - Translation policy baseline: video translation requests target German output (spoken or text depending on request).
+- German output integrity rule: German words must be written only with Latin-script German characters (`A-Z`, `a-z`, `ÄÖÜäöü`, `ß`).
+- Mixed-script homoglyph substitutions are forbidden in German words (for example replacing letters with Cyrillic, Greek, or CJK characters such as `конкреten`).
+- If mixed-script contamination is detected in a generated German word, rewrite the affected word entirely in valid German Latin script before sending.
 - Sticker pack availability may be used when context-appropriate (LovingMice).
 - If elevated actions are blocked by authorization gates (for example allowlist/provider restrictions), user-facing output must be plain-language and role-based.
 - Required baseline wording for non-admin users in English: `This action is only allowed for bot admins.`
