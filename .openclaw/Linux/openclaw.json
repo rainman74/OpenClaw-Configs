@@ -396,7 +396,8 @@
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
-          "emoji": "🤖"
+          "emoji": "✨",
+          "avatar": "avatars/Bot.png"
         }
       },
       {
@@ -406,7 +407,8 @@
         "identity": {
           "name": "Bot",
           "theme": "neutral digital assistant",
-          "emoji": "🤖"
+          "emoji": "✨",
+          "avatar": "avatars/Bot.png"
         },
         "tools": {
           "deny": [
@@ -677,7 +679,7 @@
       "chunkMode": "length",
       "streaming": "partial",
       "mediaMaxMb": 50,
-      "timeoutSeconds": 30,
+      "timeoutSeconds": 300,
       "network": {
         "autoSelectFamily": false,
         "dnsResultOrder": "ipv4first"

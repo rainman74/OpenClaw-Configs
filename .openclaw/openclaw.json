@@ -18,7 +18,7 @@
     "lastRunMode": "local"
   },
   "logging": {
-    "file": "D:/Apps/OpenClaw/openclaw.log",
+    "file": "/dev/null",
     "level": "fatal",
     "consoleLevel": "fatal",
     "consoleStyle": "compact",
@@ -29,11 +29,11 @@
     "enabled": true,
     "remoteCdpTimeoutMs": 10000,
     "remoteCdpHandshakeTimeoutMs": 15000,
-    "executablePath": "D:/Apps/Brave/Brave/Brave.exe",
+    "executablePath": "/volume1/@chromium/bin/chromium-wrapper",
     "headless": true,
     "noSandbox": true,
-    "attachOnly": true,
-    "defaultProfile": "remote",
+    "attachOnly": false,
+    "defaultProfile": "openclaw",
     "profiles": {
       "openclaw": {
         "cdpPort": 18800,
@@ -51,8 +51,8 @@
   },
   "ui": {
     "assistant": {
-      "name": "Bot",
-      "avatar": "avatars/Bot.jpg"
+      "name": "Eva",
+      "avatar": "avatars/Eva.jpg"
     }
   },
   "auth": {
@@ -345,7 +345,7 @@
           "alias": "deepseek-r1"
         }
       },
-      "workspace": "D:/Apps/OpenClaw/workspace",
+      "workspace": "/volume1/openclaw/workspace",
       "bootstrapMaxChars": 60000,
       "userTimezone": "Europe/Berlin",
       "contextPruning": {
@@ -373,14 +373,14 @@
         "model": "moonshot/kimi-k2.5",
         "includeReasoning": false,
         "target": "telegram",
-        "to": "000000000",
-        "accountId": "example_bot",
+        "to": "864887997",
+        "accountId": "eva2026de_bot",
         "prompt": "Read HEARTBEAT.md if it exists (workspace context). Follow it strictly. Do not infer or repeat old tasks from prior chats. If nothing needs attention, reply HEARTBEAT_OK.",
         "ackMaxChars": 300
       },
-      "maxConcurrent": 2,
+      "maxConcurrent": 1,
       "subagents": {
-        "maxConcurrent": 4
+        "maxConcurrent": 1
       },
       "sandbox": {
         "browser": {
@@ -391,24 +391,24 @@
     "list": [
       {
         "id": "main",
-        "workspace": "D:/Apps/OpenClaw/workspace",
+        "workspace": "/volume1/openclaw/workspace",
         "model": "minimax/minimax-m2.5",
         "identity": {
-          "name": "Bot",
-          "theme": "neutral digital assistant",
-          "emoji": "🤖",
-          "avatar": "avatars/Bot.png"
+          "name": "Eva",
+          "theme": "intelligent and knowledgeable young woman",
+          "emoji": "✨",
+          "avatar": "avatars/Eva.png"
         }
       },
       {
         "id": "group",
-        "workspace": "D:/Apps/OpenClaw/workspace",
+        "workspace": "/volume1/openclaw/workspace",
         "model": "minimax/minimax-m2.5",
         "identity": {
-          "name": "Bot",
-          "theme": "neutral digital assistant",
-          "emoji": "🤖",
-          "avatar": "avatars/Bot.png"
+          "name": "Eva",
+          "theme": "intelligent and knowledgeable young woman",
+          "emoji": "✨",
+          "avatar": "avatars/Eva.png"
         },
         "tools": {
           "deny": [
@@ -504,7 +504,7 @@
       "enabled": true,
       "allowFrom": {
         "telegram": [
-          "000000000"
+          "864887997"
         ],
         "webchat": [
           "*"
@@ -534,7 +534,7 @@
         "channel": "telegram",
         "peer": {
           "kind": "group",
-          "id": "-0000000000000"
+          "id": "-1003883326455"
         }
       }
     },
@@ -552,9 +552,9 @@
   "messages": {
     "groupChat": {
       "mentionPatterns": [
-        "@example_bot",
-        "bot",
-        "@bot"
+        "@eva2026de_bot",
+        "eva",
+        "@eva"
       ],
       "historyLimit": 10
     },
@@ -574,7 +574,7 @@
       "auto": "tagged",
       "provider": "edge",
       "edge": {
-        "voice": "de-DE-ConradNeural",
+        "voice": "de-DE-SeraphinaNeural",
         "lang": "de-DE",
         "outputFormat": "audio-24khz-48kbitrate-mono-mp3"
       },
@@ -592,7 +592,7 @@
     "ownerDisplay": "raw",
     "allowFrom": {
       "telegram": [
-        "000000000"
+        "864887997"
       ]
     }
   },
@@ -637,7 +637,7 @@
       "dmPolicy": "allowlist",
       "selfChatMode": true,
       "allowFrom": [
-        "+4900000000000"
+        "+4917655763798"
       ],
       "groupPolicy": "allowlist",
       "ackReaction": {
@@ -654,14 +654,14 @@
       "botToken": "${TELEGRAM_BOT_TOKEN}",
       "replyToMode": "off",
       "groups": {
-        "-1000000000001": {
+        "-1003883326455": {
           "requireMention": true,
           "enabled": true,
           "allowFrom": [
             "*"
           ]
         },
-        "-1000000000001": {
+        "-1001398841380": {
           "requireMention": true,
           "enabled": true,
           "allowFrom": [
@@ -670,7 +670,7 @@
         }
       },
       "allowFrom": [
-        "000000000"
+        "864887997"
       ],
       "groupPolicy": "allowlist",
       "historyLimit": 10,
@@ -709,7 +709,7 @@
       "allowedOrigins": [
         "http://127.0.0.1:18789",
         "http://localhost:18789",
-        "http://192.168.178.20:18789"
+        "http://192.168.178.5:18789"
       ],
       "dangerouslyAllowHostHeaderOriginFallback": true,
       "allowInsecureAuth": true,
@@ -728,8 +728,8 @@
     },
     "tls": {
       "enabled": false,
-      "certPath": "D:/Apps/OpenClaw/cert.pem",
-      "keyPath": "D:/Apps/OpenClaw/key.pem"
+      "certPath": "/volume1/openclaw/cert.pem",
+      "keyPath": "/volume1/openclaw/key.pem"
     },
     "nodes": {
       "allowCommands": [],
