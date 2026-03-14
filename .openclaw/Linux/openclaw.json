@@ -357,7 +357,7 @@
         "reserveTokensFloor": 5000,
         "memoryFlush": {
           "enabled": true,
-          "softThresholdTokens": 25000,
+          "softThresholdTokens": 50000,
           "prompt": "Update memory/YYYY-MM-DD.md with decisions, confirmed findings, open questions, key constraints, hypotheses, and next steps. Max 400 tokens. Reply NO_REPLY if nothing new.",
           "systemPrompt": "Context getting large. Persist durable research state now."
         }
@@ -608,7 +608,8 @@
       "atHour": 4,
       "idleMinutes": 120
     },
-    "typingIntervalSeconds": 5,
+    "typingMode": "instant",
+    "typingIntervalSeconds": 4,
     "maintenance": {
       "mode": "warn",
       "pruneAfter": "30d",
@@ -693,6 +694,12 @@
       "reactionNotifications": "all",
       "reactionLevel": "extensive",
       "ackReaction": "👀"
+      "retry": {
+        "attempts": 3,
+        "minDelayMs": 400,
+        "maxDelayMs": 30000,
+        "jitter": 0.1
+      }
     }
   },
   "discovery": {
