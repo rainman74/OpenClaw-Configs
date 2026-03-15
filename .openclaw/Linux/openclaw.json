@@ -693,7 +693,7 @@
       },
       "reactionNotifications": "all",
       "reactionLevel": "extensive",
-      "ackReaction": "👀"
+      "ackReaction": "👀",
       "retry": {
         "attempts": 3,
         "minDelayMs": 400,
